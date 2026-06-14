@@ -1,4 +1,5 @@
 const { Cerebras } = require("@cerebras/cerebras_cloud_sdk");
+const AI_PROMPTS = require("../constants/aiPrompts");
 
 const client = new Cerebras({
   apiKey: process.env.CEREBRAS_API_KEY,
@@ -10,21 +11,7 @@ const analyzeResumeWithAI = async (resumeText) => {
     messages: [
       {
         role: "system",
-        content: `
-You are an expert ATS and career advisor.
-
-Return ONLY valid JSON.
-
-Format:
-
-{
-  "atsScore": number,
-  "strengths": [],
-  "weaknesses": [],
-  "missingSkills": [],
-  "suggestions": []
-}
-`,
+        content: AI_PROMPTS.RESUME_ANALYSIS,
       },
       {
         role: "user",
@@ -47,19 +34,7 @@ const generateRoadmapWithAI = async (
       messages: [
         {
           role: "system",
-          content: `
-Return ONLY valid JSON.
-
-{
-  "roadmap": [
-    {
-      "title":"",
-      "description":"",
-      "duration":""
-    }
-  ]
-}
-`,
+          content: AI_PROMPTS.ROADMAP_GENERATION,
         },
 
         {
@@ -85,19 +60,7 @@ const analyzeGitHubProfileWithAI = async (githubData) => {
     messages: [
       {
         role: "system",
-        content: `
-Return ONLY valid JSON.
-
-{
-  "skillLevel":"",
-  "strongAreas":[],
-  "weakAreas":[],
-  "recommendedTechnologies":[],
-  "projectSuggestions":[],
-  "openSourceReadiness":"",
-  "portfolioScore":0
-}
-`,
+        content: AI_PROMPTS.GITHUB_ANALYSIS,
       },
       {
         role: "user",
