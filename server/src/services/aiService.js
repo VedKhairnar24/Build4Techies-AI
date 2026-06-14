@@ -78,7 +78,39 @@ ${skills.join(", ")}
   return response.choices[0].message.content;
 };
 
+const analyzeGitHubProfileWithAI = async (githubData) => {
+  const response = await client.chat.completions.create({
+    model: "gpt-oss-120b",
+
+    messages: [
+      {
+        role: "system",
+        content: `
+Return ONLY valid JSON.
+
+{
+  "skillLevel":"",
+  "strongAreas":[],
+  "weakAreas":[],
+  "recommendedTechnologies":[],
+  "projectSuggestions":[],
+  "openSourceReadiness":"",
+  "portfolioScore":0
+}
+`,
+      },
+      {
+        role: "user",
+        content: JSON.stringify(githubData),
+      },
+    ],
+  });
+
+  return response.choices[0].message.content;
+};
+
 module.exports = {
   analyzeResumeWithAI,
   generateRoadmapWithAI,
+  analyzeGitHubProfileWithAI,
 };
