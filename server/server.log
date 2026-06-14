@@ -1,17 +1,33 @@
-/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/@cerebras/cerebras_cloud_sdk/index.js:55
-            throw new Errors.CerebrasError("The CEREBRAS_API_KEY environment variable is missing or empty; either provide it, or instantiate the Cerebras client with an apiKey option, like new Cerebras({ apiKey: 'My API Key' }).");
-            ^
-
-CerebrasError: The CEREBRAS_API_KEY environment variable is missing or empty; either provide it, or instantiate the Cerebras client with an apiKey option, like new Cerebras({ apiKey: 'My API Key' }).
-    at new Cerebras (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/@cerebras/cerebras_cloud_sdk/index.js:55:19)
-    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/src/services/aiService.js:3:16)
-    at Module._compile (node:internal/modules/cjs/loader:1854:14)
-    at Object..js (node:internal/modules/cjs/loader:1985:10)
-    at Module.load (node:internal/modules/cjs/loader:1577:32)
-    at Module._load (node:internal/modules/cjs/loader:1379:12)
-    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
-    at Module.require (node:internal/modules/cjs/loader:1600:12)
-    at require (node:internal/modules/helpers:153:16)
-    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/src/controllers/analysisController.js:6:5)
-
-Node.js v24.16.0
+◇ injected env (4) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+Server running on port 5000
+MongoDB Connected
+NotFoundError: 404 Model llama-3.3-70b does not exist or you do not have access to it.
+    at APIError.generate (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/@cerebras/cerebras_cloud_sdk/error.js:49:20)
+    at Cerebras.makeStatusError (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/@cerebras/cerebras_cloud_sdk/core.js:293:33)
+    at Cerebras.makeRequest (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/@cerebras/cerebras_cloud_sdk/core.js:339:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async analyzeResumeWithAI (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/src/services/aiService.js:8:20)
+    at async analyzeResume (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/src/controllers/analysisController.js:21:24) {
+  status: 404,
+  headers: {
+    'alt-svc': 'h3=":443"; ma=86400',
+    'cf-cache-status': 'DYNAMIC',
+    'cf-ray': 'a0b903fc7aa180be-BOM',
+    connection: 'keep-alive',
+    'content-encoding': 'gzip',
+    'content-type': 'application/json',
+    date: 'Sun, 14 Jun 2026 11:32:38 GMT',
+    'referrer-policy': 'strict-origin-when-cross-origin',
+    server: 'cloudflare',
+    'set-cookie': '__cf_bm=kTpQ3goP5TEMo3_Q0frTwdcBHBcQpQVe9yPo8y4giRA-1781436758.4758825-1.0.1.1-J6qFLlAsKjX7bBF2xueINH.G1COjbLgKbf.wh1eRYlccqa0nv6yDCgTcq5SZkNU.iramrTrLDM5QhewgBY3Cq13AcoHgzevoyJVbqw8dwdUjtpfhRmKfJr0TdTwvhj0e; HttpOnly; SameSite=None; Secure; Path=/; Domain=api.cerebras.ai; Expires=Sun, 14 Jun 2026 12:02:38 GMT',
+    'strict-transport-security': 'max-age=15552000; includeSubDomains; preload',
+    'transfer-encoding': 'chunked',
+    'x-content-type-options': 'nosniff'
+  },
+  error: {
+    message: 'Model llama-3.3-70b does not exist or you do not have access to it.',
+    type: 'not_found_error',
+    param: 'model',
+    code: 'model_not_found'
+  }
+}
