@@ -72,8 +72,29 @@ const analyzeGitHubProfileWithAI = async (githubData) => {
   return response.choices[0].message.content;
 };
 
+const generateOpenSourceRecommendations = async (userData) => {
+  const response = await client.chat.completions.create({
+    model: "gpt-oss-120b",
+
+    messages: [
+      {
+        role: "system",
+        content: AI_PROMPTS.OPEN_SOURCE_RECOMMENDATION,
+      },
+
+      {
+        role: "user",
+        content: JSON.stringify(userData),
+      },
+    ],
+  });
+
+  return response.choices[0].message.content;
+};
+
 module.exports = {
   analyzeResumeWithAI,
   generateRoadmapWithAI,
   analyzeGitHubProfileWithAI,
+  generateOpenSourceRecommendations,
 };

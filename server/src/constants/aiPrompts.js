@@ -41,6 +41,24 @@ Return ONLY valid JSON.
   "openSourceReadiness":"",
   "portfolioScore":0
 }
+`,
+
+  OPEN_SOURCE_RECOMMENDATION: `
+Return ONLY valid JSON.
+
+{
+  "repositories": [
+    {
+      "name":"",
+      "difficulty":"",
+      "reason":""
+    }
+  ],
+
+  "learningPath": [],
+
+  "contributionTips": []
+}
 `
 };
 

@@ -11,6 +11,7 @@ const resumeRoutes = require("./src/routes/resumeRoutes");
 const analysisRoutes = require("./src/routes/analysisRoutes");
 const roadmapRoutes = require("./src/routes/roadmapRoutes");
 const githubRoutes = require("./src/routes/githubRoutes");
+const openSourceRoutes = require("./src/routes/openSourceRoutes");
 
 connectDB();
 
@@ -25,6 +26,7 @@ app.use("/api/resume", resumeRoutes);
 app.use("/api/analysis", analysisRoutes);
 app.use("/api/roadmap", roadmapRoutes);
 app.use("/api/github", githubRoutes);
+app.use("/api/opensource", openSourceRoutes);
 
 app.get("/", (req, res) => {
   res.json({
