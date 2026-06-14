@@ -1,17 +1,17 @@
-◇ injected env (4) from .env // tip: ⌘ enable debugging { debug: true }
-Server running on port 5000
-MongoDB Connected
-PDF Parsing or DB Error: Error
-    at UnknownErrorExceptionClosure (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:443:37)
-    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:446:2)
-    at __w_pdfjs_require__ (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:45:30)
-    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:7939:23)
-    at __w_pdfjs_require__ (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:45:30)
-    at /home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:88:18
-    at /home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:91:10
-    at webpackUniversalModuleDefinition (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:18:20)
-    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:25:3)
-    at Module._compile (node:internal/modules/cjs/loader:1854:14) {
-  message: 'Invalid number: - (charCode 45)',
-  details: 'FormatError: Invalid number: - (charCode 45)'
-}
+/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/@cerebras/cerebras_cloud_sdk/index.js:55
+            throw new Errors.CerebrasError("The CEREBRAS_API_KEY environment variable is missing or empty; either provide it, or instantiate the Cerebras client with an apiKey option, like new Cerebras({ apiKey: 'My API Key' }).");
+            ^
+
+CerebrasError: The CEREBRAS_API_KEY environment variable is missing or empty; either provide it, or instantiate the Cerebras client with an apiKey option, like new Cerebras({ apiKey: 'My API Key' }).
+    at new Cerebras (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/@cerebras/cerebras_cloud_sdk/index.js:55:19)
+    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/src/services/aiService.js:3:16)
+    at Module._compile (node:internal/modules/cjs/loader:1854:14)
+    at Object..js (node:internal/modules/cjs/loader:1985:10)
+    at Module.load (node:internal/modules/cjs/loader:1577:32)
+    at Module._load (node:internal/modules/cjs/loader:1379:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.require (node:internal/modules/cjs/loader:1600:12)
+    at require (node:internal/modules/helpers:153:16)
+    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/src/controllers/analysisController.js:6:5)
+
+Node.js v24.16.0
