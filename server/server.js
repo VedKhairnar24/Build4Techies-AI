@@ -12,6 +12,7 @@ const analysisRoutes = require("./src/routes/analysisRoutes");
 const roadmapRoutes = require("./src/routes/roadmapRoutes");
 const githubRoutes = require("./src/routes/githubRoutes");
 const openSourceRoutes = require("./src/routes/openSourceRoutes");
+const errorHandler = require("./src/middleware/errorMiddleware");
 
 connectDB();
 
@@ -34,6 +35,8 @@ app.get("/", (req, res) => {
     message: "Build4Techies-AI API Running",
   });
 });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
