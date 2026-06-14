@@ -26,6 +26,7 @@ const uploadResume = async (req, res) => {
       resume,
     });
   } catch (error) {
+    console.error("PDF Parsing or DB Error:", error);
     res.status(500).json({
       success: false,
       message: "Server error",
@@ -44,6 +45,7 @@ const getUserResumes = async (req, res) => {
       resumes,
     });
   } catch (error) {
+    console.error("Error fetching resumes:", error);
     res.status(500).json({
       success: false,
       message: "Server error",

@@ -1,3 +1,17 @@
-◇ injected env (4) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+◇ injected env (4) from .env // tip: ⌘ enable debugging { debug: true }
 Server running on port 5000
 MongoDB Connected
+PDF Parsing or DB Error: Error
+    at UnknownErrorExceptionClosure (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:443:37)
+    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:446:2)
+    at __w_pdfjs_require__ (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:45:30)
+    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:7939:23)
+    at __w_pdfjs_require__ (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:45:30)
+    at /home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:88:18
+    at /home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:91:10
+    at webpackUniversalModuleDefinition (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:18:20)
+    at Object.<anonymous> (/home/ved-khairnar/Desktop/Open-Source-Project/Build4Techies-AI/server/node_modules/pdf-parse/lib/pdf.js/v1.10.100/build/pdf.js:25:3)
+    at Module._compile (node:internal/modules/cjs/loader:1854:14) {
+  message: 'Invalid number: - (charCode 45)',
+  details: 'FormatError: Invalid number: - (charCode 45)'
+}
