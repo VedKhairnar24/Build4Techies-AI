@@ -41,7 +41,7 @@ const updateProfile = async (req, res) => {
         githubUsername,
       },
       {
-        new: true,
+        returnDocument: 'after',
       }
     ).select("-password");
 
