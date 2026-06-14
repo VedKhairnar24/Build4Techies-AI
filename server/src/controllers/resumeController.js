@@ -1,4 +1,5 @@
 const Resume = require("../models/Resume");
+const { extractTextFromPDF } = require("../services/pdfService");
 
 const uploadResume = async (req, res) => {
   try {
@@ -9,11 +10,14 @@ const uploadResume = async (req, res) => {
       });
     }
 
+    const extractedText = await extractTextFromPDF(req.file.path);
+
     const resume = await Resume.create({
       userId: req.user.id,
       originalFileName: req.file.originalname,
       fileName: req.file.filename,
       filePath: req.file.path,
+      extractedText,
     });
 
     res.status(201).json({
