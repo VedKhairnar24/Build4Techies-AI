@@ -6,7 +6,7 @@ const client = new Cerebras({
 
 const analyzeResumeWithAI = async (resumeText) => {
   const response = await client.chat.completions.create({
-    model: "llama-3.3-70b",
+    model: "gpt-oss-120b",
     messages: [
       {
         role: "system",
@@ -36,6 +36,49 @@ Format:
   return response.choices[0].message.content;
 };
 
+const generateRoadmapWithAI = async (
+  goal,
+  skills = []
+) => {
+  const response =
+    await client.chat.completions.create({
+      model: "gpt-oss-120b",
+
+      messages: [
+        {
+          role: "system",
+          content: `
+Return ONLY valid JSON.
+
+{
+  "roadmap": [
+    {
+      "title":"",
+      "description":"",
+      "duration":""
+    }
+  ]
+}
+`,
+        },
+
+        {
+          role: "user",
+          content: `
+Career Goal:
+${goal}
+
+Current Skills:
+${skills.join(", ")}
+`,
+        },
+      ],
+    });
+
+  return response.choices[0].message.content;
+};
+
 module.exports = {
   analyzeResumeWithAI,
+  generateRoadmapWithAI,
 };
