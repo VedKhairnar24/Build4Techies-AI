@@ -1,59 +1,49 @@
-const Resume = require("../models/Resume");
-const { extractTextFromPDF } = require("../services/pdfService");
+const fs = require("fs");
+const pdfParse = require("pdf-parse");
 
-const uploadResume = async (req, res) => {
+const Resume = require("../models/Resume");
+
+const uploadResume = async (
+  req,
+  res
+) => {
   try {
     if (!req.file) {
       return res.status(400).json({
         success: false,
-        message: "Please upload a PDF file",
+        message: "Resume file required",
       });
     }
 
-    const extractedText = await extractTextFromPDF(req.file.path);
+    const dataBuffer =
+      fs.readFileSync(req.file.path);
 
-    const resume = await Resume.create({
-      userId: req.user.id,
-      originalFileName: req.file.originalname,
-      fileName: req.file.filename,
-      filePath: req.file.path,
-      extractedText,
+    const pdfData =
+      await pdfParse(dataBuffer);
+
+    await Resume.create({
+      user: req.user.id,
+      resumeText: pdfData.text,
     });
 
-    res.status(201).json({
+    fs.unlinkSync(req.file.path);
+
+    return res.status(200).json({
       success: true,
-      message: "Resume uploaded successfully",
-      resume,
+      message:
+        "Resume processed successfully",
     });
   } catch (error) {
-    console.error("PDF Parsing or DB Error:", error);
-    res.status(500).json({
-      success: false,
-      message: "Server error",
-    });
-  }
-};
+    console.error(error);
 
-const getUserResumes = async (req, res) => {
-  try {
-    const resumes = await Resume.find({
-      userId: req.user.id,
-    }).sort({ createdAt: -1 });
-
-    res.status(200).json({
-      success: true,
-      resumes,
-    });
-  } catch (error) {
-    console.error("Error fetching resumes:", error);
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
-      message: "Server error",
+      message:
+        "Resume upload failed",
     });
   }
 };
 
 module.exports = {
   uploadResume,
-  getUserResumes,
 };
