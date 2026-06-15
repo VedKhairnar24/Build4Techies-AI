@@ -76,6 +76,22 @@ Upload a new PDF resume. This will automatically extract the text.
 Retrieve all uploaded resumes for the user.
 **Headers:** `Authorization: Bearer <token>`
 
+### `POST /api/resume/analyze`
+Analyze the most recently uploaded resume using Cerebras AI.
+**Headers:** `Authorization: Bearer <token>`
+**Response:**
+```json
+{
+  "success": true,
+  "analysis": {
+    "atsScore": 82,
+    "strengths": ["Strong React skills", "Multiple projects"],
+    "weaknesses": ["Missing testing"],
+    "suggestions": ["Learn Jest", "Add CI/CD"]
+  }
+}
+```
+
 ---
 
 ## Analysis Routes
