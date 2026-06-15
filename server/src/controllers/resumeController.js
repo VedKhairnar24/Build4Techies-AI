@@ -1,4 +1,4 @@
-const fs = require("fs");
+
 const pdfParse = require("pdf-parse");
 
 const Resume = require("../models/Resume");
@@ -16,8 +16,7 @@ const uploadResume = async (
       });
     }
 
-    const dataBuffer =
-      fs.readFileSync(req.file.path);
+    const dataBuffer = req.file.buffer;
 
     const pdfData =
       await pdfParse(dataBuffer);
@@ -27,7 +26,7 @@ const uploadResume = async (
       resumeText: pdfData.text,
     });
 
-    fs.unlinkSync(req.file.path);
+
 
     return res.status(200).json({
       success: true,
