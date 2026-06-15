@@ -18,6 +18,11 @@ const resumeSchema = new mongoose.Schema(
       default: 0,
     },
 
+    analysis: {
+      type: Object,
+      default: {},
+    },
+
     uploadedAt: {
       type: Date,
       default: Date.now,

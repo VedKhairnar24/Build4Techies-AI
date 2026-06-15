@@ -7,6 +7,7 @@ const upload =
 
 const {
   uploadResume,
+  analyzeResume,
 } = require(
   "../controllers/resumeController"
 );
@@ -19,6 +20,12 @@ router.post(
   protect,
   upload.single("resume"),
   uploadResume
+);
+
+router.post(
+  "/analyze",
+  protect,
+  analyzeResume
 );
 
 module.exports = router;
