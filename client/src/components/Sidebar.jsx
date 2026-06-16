@@ -25,9 +25,12 @@ function Sidebar() {
   return (
     <aside className="w-64 min-h-screen border-r bg-white">
       <div className="p-6 border-b">
-        <h1 className="font-bold text-xl">
-          Build4Techies-AI
+        <h1 className="font-bold text-xl text-gray-900">
+          Build4Techies AI
         </h1>
+        <p className="text-xs text-gray-500 mt-1 font-medium tracking-wide uppercase">
+          Career Growth Platform
+        </p>
       </div>
 
       <nav className="p-4 space-y-2">
