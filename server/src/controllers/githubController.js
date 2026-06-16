@@ -48,7 +48,7 @@ const analyzeGitHub = async (req, res) => {
     });
   } catch (error) {
     console.error(
-      "GitHub Error:",
+      "AI Error:",
       error.response?.data || error
     );
 
