@@ -56,7 +56,7 @@ function Roadmap() {
           </div>
           <button 
             onClick={handleGenerate} 
-            disabled={loading || initialLoading || careerGoal === "Not Set"}
+            disabled={loading || careerGoal === "Not Set"}
             className="w-full sm:w-auto bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2 mt-4 md:mt-0"
           >
             {loading ? <Spinner /> : null}
@@ -144,7 +144,7 @@ function Roadmap() {
           </div>
         )}
 
-        {!roadmapData && !loading && !initialLoading && (
+        {!roadmapData && !loading && (
           <EmptyState
             title="No Roadmap Generated"
             description="Generate your career roadmap."
