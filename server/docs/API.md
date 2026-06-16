@@ -64,51 +64,57 @@ Update the current user's profile.
 
 ---
 
-## Resume Routes
+## Resume and Analysis Routes
+
+### Frontend Flow
+```text
+User Upload Resume
+       ↓
+POST /api/resume/upload
+       ↓
+Resume Stored as Text
+       ↓
+POST /api/resume/analyze
+       ↓
+Show ATS Score & Suggestions
+       ↓
+GET /api/analysis/history
+       ↓
+Show Previous Analyses
+```
 
 ### `POST /api/resume/upload`
-Upload a new PDF resume. This will automatically extract the text.
+**Purpose:** Upload resume → Extract text → Store text → Delete PDF
 **Headers:** `Authorization: Bearer <token>`
 **Body (FormData):**
 - `resume`: `[File]` (Must be a `.pdf` file)
-
-### `GET /api/resume/all`
-Retrieve all uploaded resumes for the user.
-**Headers:** `Authorization: Bearer <token>`
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Resume processed successfully"
+}
+```
 
 ### `POST /api/resume/analyze`
-Analyze the most recently uploaded resume using Cerebras AI.
+**Purpose:** Analyze the latest uploaded resume using AI
 **Headers:** `Authorization: Bearer <token>`
+**Body:** `{}` or no body required.
 **Response:**
 ```json
 {
   "success": true,
   "analysis": {
-    "atsScore": 82,
-    "strengths": ["Strong React skills", "Multiple projects"],
-    "weaknesses": ["Missing testing"],
-    "suggestions": ["Learn Jest", "Add CI/CD"]
+    "atsScore": 45,
+    "strengths": [],
+    "weaknesses": [],
+    "suggestions": []
   }
 }
 ```
 
----
-
-## Analysis Routes
-
-### `POST /api/analysis/resume`
-Analyze a specific uploaded resume using Cerebras AI.
-**Headers:** `Authorization: Bearer <token>`
-**Body (JSON):**
-```json
-{
-  "resumeId": "6a2e8d4b0ea57965f2e172d8"
-}
-```
-*(Retrieve the `resumeId` from the `GET /api/resume/all` response)*
-
 ### `GET /api/analysis/history`
-Get all previous AI resume analyses.
+**Purpose:** Retrieve all previous AI resume analyses
 **Headers:** `Authorization: Bearer <token>`
 
 ---
