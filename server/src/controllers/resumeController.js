@@ -46,11 +46,15 @@ const uploadResume = async (
 
 const analyzeResume = async (req, res) => {
   try {
+    console.log("USER:", req.user);
+
     const resume = await Resume.findOne({
       user: req.user.id,
     }).sort({
       createdAt: -1,
     });
+
+    console.log("RESUME:", resume);
 
     if (!resume) {
       return res.status(404).json({
@@ -60,6 +64,8 @@ const analyzeResume = async (req, res) => {
     }
 
     const aiResult = await analyzeWithAI(resume.resumeText);
+
+    console.log("AI RESULT:", aiResult);
 
     resume.analysis = aiResult;
     resume.atsScore = aiResult.atsScore || 0;
@@ -71,9 +77,10 @@ const analyzeResume = async (req, res) => {
     });
   } catch (error) {
     console.error("Analyze Error:", error);
+
     return res.status(500).json({
       success: false,
-      message: "Analysis failed",
+      message: error.message,
     });
   }
 };
