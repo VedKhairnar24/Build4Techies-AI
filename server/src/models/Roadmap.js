@@ -2,31 +2,23 @@ const mongoose = require("mongoose");
 
 const roadmapSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
 
-    goal: {
-      type: String,
-      required: true,
-    },
+    careerGoal: String,
 
-    roadmap: [
-      {
-        title: String,
-        description: String,
-        duration: String,
-      },
-    ],
+    roadmap: Object,
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model(
-  "Roadmap",
-  roadmapSchema
-);
+module.exports =
+  mongoose.model(
+    "Roadmap",
+    roadmapSchema
+  );

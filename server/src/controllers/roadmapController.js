@@ -1,5 +1,6 @@
 const Roadmap = require("../models/Roadmap");
 const User = require("../models/User");
+const Resume = require("../models/Resume");
 
 const {
   generateRoadmapWithAI,
@@ -7,21 +8,35 @@ const {
 
 const generateRoadmap = async (req, res) => {
   try {
-    const { goal } = req.body;
-
     const user = await User.findById(req.user.id);
+    
+    const goal = user.careerGoal;
+    if (!goal) {
+      return res.status(400).json({ success: false, message: "Career goal not set in profile." });
+    }
+
+    const latestResume = await Resume.findOne({ user: req.user.id }).sort({ createdAt: -1 });
+    const atsScore = latestResume ? latestResume.atsScore : 0;
 
     const aiResponse = await generateRoadmapWithAI(
       goal,
-      user.skills
+      user.skills,
+      atsScore
     );
 
-    const parsed = JSON.parse(aiResponse);
+    let jsonString = aiResponse;
+    if (jsonString.includes("```json")) {
+      jsonString = jsonString.split("```json")[1].split("```")[0].trim();
+    } else if (jsonString.includes("```")) {
+      jsonString = jsonString.split("```")[1].split("```")[0].trim();
+    }
+
+    const parsed = JSON.parse(jsonString);
 
     const roadmap = await Roadmap.create({
-      userId: req.user.id,
-      goal,
-      roadmap: parsed.roadmap,
+      user: req.user.id,
+      careerGoal: goal,
+      roadmap: parsed,
     });
 
     res.status(200).json({
@@ -39,16 +54,21 @@ const generateRoadmap = async (req, res) => {
 };
 
 const getRoadmapHistory = async (req, res) => {
-  const roadmaps = await Roadmap.find({
-    userId: req.user.id,
-  }).sort({
-    createdAt: -1,
-  });
+  try {
+    const roadmaps = await Roadmap.find({
+      user: req.user.id,
+    }).sort({
+      createdAt: -1,
+    });
 
-  res.json({
-    success: true,
-    roadmaps,
-  });
+    res.json({
+      success: true,
+      roadmaps,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 module.exports = {

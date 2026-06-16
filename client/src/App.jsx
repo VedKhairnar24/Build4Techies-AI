@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import ResumeAnalysis from "./pages/ResumeAnalysis";
+import Roadmap from "./pages/Roadmap";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/resume" element={<ResumeAnalysis />} />
+        <Route path="/roadmap" element={<Roadmap />} />
       </Routes>
     </BrowserRouter>
   );

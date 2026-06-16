@@ -25,7 +25,8 @@ const analyzeResumeWithAI = async (resumeText) => {
 
 const generateRoadmapWithAI = async (
   goal,
-  skills = []
+  skills = [],
+  atsScore = 0
 ) => {
   const response =
     await client.chat.completions.create({
@@ -45,6 +46,9 @@ ${goal}
 
 Current Skills:
 ${skills.join(", ")}
+
+Resume Analysis:
+ATS Score ${atsScore}
 `,
         },
       ],

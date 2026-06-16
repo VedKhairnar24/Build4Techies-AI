@@ -54,6 +54,14 @@ function Sidebar() {
         </Link>
 
         <Link
+          to="/roadmap"
+          className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
+        >
+          <Target size={20} />
+          Career Roadmap
+        </Link>
+
+        <Link
           to="/github"
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >

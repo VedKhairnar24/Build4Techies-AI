@@ -19,13 +19,16 @@ Format:
 Return ONLY valid JSON.
 
 {
-  "roadmap": [
+  "careerGoal":"",
+  "timeline":[
     {
-      "title":"",
-      "description":"",
-      "duration":""
+      "month":"",
+      "topics":[]
     }
-  ]
+  ],
+  "projects":[],
+  "certifications":[],
+  "openSource":[]
 }
 `,
 
