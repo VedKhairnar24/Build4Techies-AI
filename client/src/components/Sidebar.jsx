@@ -17,7 +17,7 @@ function Sidebar() {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/login");
   };
 
   return (

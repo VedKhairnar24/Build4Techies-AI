@@ -10,6 +10,7 @@ import Roadmap from "./pages/Roadmap";
 import JobReadiness from "./pages/JobReadiness";
 import GitHubAnalyzer from "./pages/GitHubAnalyzer";
 import OpenSource from "./pages/OpenSource";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -18,13 +19,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/resume" element={<ResumeAnalysis />} />
-        <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="/job-readiness" element={<JobReadiness />} />
-        <Route path="/github" element={<GitHubAnalyzer />} />
-        <Route path="/opensource" element={<OpenSource />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="/resume" element={<ProtectedRoute><ResumeAnalysis /></ProtectedRoute>} />
+        <Route path="/roadmap" element={<ProtectedRoute><Roadmap /></ProtectedRoute>} />
+        <Route path="/job-readiness" element={<ProtectedRoute><JobReadiness /></ProtectedRoute>} />
+        <Route path="/github" element={<ProtectedRoute><GitHubAnalyzer /></ProtectedRoute>} />
+        <Route path="/opensource" element={<ProtectedRoute><OpenSource /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
