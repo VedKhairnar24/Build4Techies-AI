@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getRecommendations, getRecommendationHistory } from "../services/openSourceService";
 import Sidebar from "../components/Sidebar";
+import toast from "react-hot-toast";
 
 function OpenSource() {
   const { user } = useContext(AuthContext);
@@ -34,9 +35,12 @@ function OpenSource() {
     try {
       const res = await getRecommendations(user.token);
       setRepositories(res.repositories);
+      toast.success("Recommendations generated");
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Failed to generate recommendations.");
+      const errMsg = err.response?.data?.message || "Failed to generate recommendations.";
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

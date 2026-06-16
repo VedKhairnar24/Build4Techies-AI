@@ -10,10 +10,10 @@ import {
 
 import Sidebar from "../components/Sidebar";
 
-import {
   getProfile,
   updateProfile,
 } from "../services/profileService";
+import toast from "react-hot-toast";
 
 function Profile() {
 
@@ -84,24 +84,15 @@ function Profile() {
         await updateProfile(
           {
             ...formData,
-
-            skills:
-              formData.skills
-                .split(",")
-                .map(
-                  (skill) =>
-                    skill.trim()
-                ),
+            skills: formData.skills.split(",").map((skill) => skill.trim()),
           },
           user.token
         );
 
-        alert(
-          "Profile Updated"
-        );
-
+        toast.success("Profile updated successfully");
       } catch (error) {
         console.error(error);
+        toast.error("Failed to update profile");
       }
     };
 

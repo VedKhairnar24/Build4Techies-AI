@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { generateRoadmap, getRoadmapHistory } from "../services/roadmapService";
 import Sidebar from "../components/Sidebar";
+import toast from "react-hot-toast";
 
 function Roadmap() {
   const { user } = useContext(AuthContext);
@@ -33,9 +34,12 @@ function Roadmap() {
     try {
       const result = await generateRoadmap(user.token);
       setRoadmapData(result.roadmap.roadmap);
+      toast.success("Roadmap generated");
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Failed to generate roadmap.");
+      const errMsg = err.response?.data?.message || "Failed to generate roadmap.";
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

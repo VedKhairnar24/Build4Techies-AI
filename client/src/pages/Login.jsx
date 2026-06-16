@@ -10,9 +10,8 @@ import {
   useContext,
 } from "react";
 
-import {
-  AuthContext,
-} from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 function Login() {
 
@@ -54,15 +53,11 @@ function Login() {
           );
 
         login(response);
-
-        navigate(
-          "/dashboard"
-        );
-
+        toast.success("Login successful");
+        navigate("/dashboard");
       } catch (error) {
-
         console.error(error);
-
+        toast.error(error.response?.data?.message || "Login failed");
       }
     };
 

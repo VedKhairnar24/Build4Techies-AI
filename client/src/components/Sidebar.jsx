@@ -10,6 +10,7 @@ import {
   Target,
   LogOut,
 } from "lucide-react";
+import toast from "react-hot-toast";
 
 function Sidebar() {
   const { logout } = useContext(AuthContext);
@@ -17,6 +18,7 @@ function Sidebar() {
 
   const handleLogout = () => {
     logout();
+    toast.success("Logged out successfully");
     navigate("/login");
   };
 

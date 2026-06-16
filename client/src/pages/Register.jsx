@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {
   registerUser,
 } from "../services/authService";
+import toast from "react-hot-toast";
 
 function Register() {
 
@@ -34,16 +35,12 @@ function Register() {
 
       try {
 
-        await registerUser(
-          formData
-        );
-
+        await registerUser(formData);
+        toast.success("Account created successfully");
         navigate("/login");
-
       } catch (error) {
-
         console.error(error);
-
+        toast.error(error.response?.data?.message || "Registration failed");
       }
     };
 

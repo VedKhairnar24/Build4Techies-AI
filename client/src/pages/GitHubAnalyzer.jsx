@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { analyzeGitHub } from "../services/githubAnalyzerService";
 import Sidebar from "../components/Sidebar";
+import toast from "react-hot-toast";
 
 function GitHubAnalyzer() {
   const { user } = useContext(AuthContext);
@@ -19,9 +20,12 @@ function GitHubAnalyzer() {
       const result = await analyzeGitHub(username, user.token);
       setData(result.analysis.analysis);
       setExtraStats(result.extraStats);
+      toast.success("GitHub analysis completed");
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Failed to analyze GitHub profile.");
+      const errMsg = err.response?.data?.message || "Failed to analyze GitHub profile.";
+      setError(errMsg);
+      toast.error(errMsg);
     } finally {
       setLoading(false);
     }

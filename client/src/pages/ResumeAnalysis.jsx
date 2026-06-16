@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { uploadResume, analyzeResume } from "../services/resumeService";
 import Sidebar from "../components/Sidebar";
+import toast from "react-hot-toast";
 
 function ResumeAnalysis() {
   const { user } = useContext(AuthContext);
@@ -16,10 +17,10 @@ function ResumeAnalysis() {
       const formData = new FormData();
       formData.append("resume", file);
       await uploadResume(formData, user.token);
-      alert("Resume uploaded successfully!");
+      toast.success("Resume uploaded successfully");
     } catch (error) {
       console.error(error);
-      alert("Failed to upload resume.");
+      toast.error("Resume upload failed");
     } finally {
       setLoading(false);
     }
@@ -30,9 +31,10 @@ function ResumeAnalysis() {
     try {
       const result = await analyzeResume(user.token);
       setAnalysis(result.analysis);
+      toast.success("Analysis completed");
     } catch (error) {
       console.error(error);
-      alert("Failed to analyze resume.");
+      toast.error("Failed to analyze resume");
     } finally {
       setLoading(false);
     }
