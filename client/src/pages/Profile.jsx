@@ -8,7 +8,7 @@ import {
   AuthContext,
 } from "../context/AuthContext";
 
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 
   getProfile,
   updateProfile,
@@ -104,13 +104,10 @@ function Profile() {
     };
 
   return (
-    <div className="flex">
+    <Layout>
+      <div className="p-4 md:p-8">
 
-      <Sidebar />
-
-      <main className="flex-1 p-8 bg-gray-50 min-h-screen">
-
-        <h1 className="text-4xl font-bold mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8">
           Profile
         </h1>
 
@@ -121,7 +118,7 @@ function Profile() {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="max-w-2xl bg-white border rounded-xl p-8"
+            className="w-full max-w-2xl bg-white border rounded-xl p-4 md:p-8"
           >
 
           <input
@@ -170,9 +167,8 @@ function Profile() {
         </form>
         )}
 
-      </main>
-
-    </div>
+      </div>
+    </Layout>
   );
 }
 

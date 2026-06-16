@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { uploadResume, analyzeResume } from "../services/resumeService";
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
 
@@ -42,13 +42,12 @@ function ResumeAnalysis() {
   };
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-4xl font-bold mb-8">Resume Analysis</h1>
+    <Layout>
+      <div className="p-4 md:p-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8">Resume Analysis</h1>
         
-        <div className="mb-8 p-6 bg-white rounded-lg shadow-sm border border-gray-100">
-          <div className="flex flex-col gap-4 max-w-md">
+        <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className="flex flex-col gap-4 w-full max-w-md">
             <input 
               type="file" 
               accept=".pdf"
@@ -60,19 +59,19 @@ function ResumeAnalysis() {
                 file:bg-blue-50 file:text-blue-700
                 hover:file:bg-blue-100"
             />
-            <div className="flex gap-4 mt-2">
+            <div className="flex flex-col sm:flex-row gap-4 mt-2">
               <button 
                 onClick={handleUpload} 
                 disabled={!file || loading}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
               >
                 {loading && file ? <Spinner /> : null}
-                {loading && file ? "Uploading..." : "Upload Resume"}
+                {loading && file ? "Uploading..." : "Upload PDF"}
               </button>
               <button 
                 onClick={handleAnalyze} 
                 disabled={loading}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
               >
                 {loading && !file ? <Spinner /> : null}
                 {loading && !file ? "Analyzing..." : "Analyze Resume"}
@@ -141,8 +140,8 @@ function ResumeAnalysis() {
             </div>
           </div>
         )}
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

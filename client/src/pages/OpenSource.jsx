@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getRecommendations, getRecommendationHistory } from "../services/openSourceService";
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
 
@@ -57,18 +57,17 @@ function OpenSource() {
   };
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-8 bg-gray-50 min-h-screen">
-        <div className="flex justify-between items-center mb-8 border-b border-gray-200 pb-6">
+    <Layout>
+      <div className="p-4 md:p-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
-            <h1 className="text-4xl font-bold mb-2 text-gray-800">Open Source Recommendations</h1>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-800">Open Source Recommendations</h1>
             <p className="text-gray-500 text-lg">AI curated repositories based on your skills and career goal.</p>
           </div>
           <button 
             onClick={handleGenerate} 
             disabled={loading || initialLoading}
-            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
           >
             {loading ? <Spinner /> : null}
             {loading ? "Generating..." : "Generate Recommendations"}
@@ -146,8 +145,8 @@ function OpenSource() {
             ))}
           </div>
         )}
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

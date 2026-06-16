@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { analyzeGitHub } from "../services/githubAnalyzerService";
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
 
@@ -33,25 +33,23 @@ function GitHubAnalyzer() {
   };
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-4xl font-bold mb-8 text-gray-800">GitHub Analyzer</h1>
+    <Layout>
+      <div className="p-4 md:p-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8">GitHub Analyzer</h1>
         
-        <div className="mb-8 p-6 bg-white rounded-xl shadow-sm border border-gray-100 max-w-xl">
-          <label className="block text-gray-700 font-medium mb-2">GitHub Username</label>
-          <div className="flex gap-4">
+        <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className="flex flex-col sm:flex-row gap-4 max-w-xl">
             <input 
               type="text" 
+              placeholder="Enter GitHub Username (e.g. torvalds)"
               value={username}
-              onChange={(e) => setUsername(e.target.value)} 
-              placeholder="e.g. VedKhairnar24"
-              className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-gray-900 outline-none"
             />
             <button 
               onClick={handleAnalyze} 
               disabled={!username || loading}
-              className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              className="w-full sm:w-auto bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
             >
               {loading ? <Spinner /> : null}
               {loading ? "Analyzing..." : "Analyze"}
@@ -73,7 +71,7 @@ function GitHubAnalyzer() {
         )}
 
         {data && !loading && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-sm border border-gray-100">
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
                 <h2 className="text-2xl font-bold text-gray-800">Analysis Results</h2>
@@ -175,8 +173,8 @@ function GitHubAnalyzer() {
             )}
           </div>
         )}
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

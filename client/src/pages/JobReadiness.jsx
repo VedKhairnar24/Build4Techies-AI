@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getJobReadiness } from "../services/jobReadinessService";
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 
 function JobReadiness() {
   const { user } = useContext(AuthContext);
@@ -41,10 +41,9 @@ function JobReadiness() {
   };
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-4xl font-bold mb-8">Job Readiness</h1>
+    <Layout>
+      <div className="p-4 md:p-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-8">Job Readiness</h1>
 
         {error && (
           <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
@@ -121,8 +120,8 @@ function JobReadiness() {
             </div>
           </div>
         ) : null}
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 

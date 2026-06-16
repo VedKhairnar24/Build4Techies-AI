@@ -12,13 +12,14 @@ import {
 } from "lucide-react";
 import toast from "react-hot-toast";
 
-function Sidebar() {
+function Sidebar({ onClose }) {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     toast.success("Logged out successfully");
+    if (onClose) onClose();
     navigate("/login");
   };
 
@@ -36,6 +37,7 @@ function Sidebar() {
       <nav className="p-4 space-y-2">
         <Link
           to="/dashboard"
+          onClick={onClose}
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >
           <LayoutDashboard size={20} />
@@ -44,6 +46,7 @@ function Sidebar() {
 
         <Link
           to="/profile"
+          onClick={onClose}
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >
           <User size={20} />
@@ -52,6 +55,7 @@ function Sidebar() {
 
         <Link
           to="/resume"
+          onClick={onClose}
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >
           <FileText size={20} />
@@ -60,6 +64,7 @@ function Sidebar() {
 
         <Link
           to="/roadmap"
+          onClick={onClose}
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >
           <Target size={20} />
@@ -68,6 +73,7 @@ function Sidebar() {
 
         <Link
           to="/github"
+          onClick={onClose}
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >
           <Github size={20} />
@@ -76,6 +82,7 @@ function Sidebar() {
 
         <Link
           to="/opensource"
+          onClick={onClose}
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >
           <Briefcase size={20} />
@@ -84,6 +91,7 @@ function Sidebar() {
 
         <Link
           to="/job-readiness"
+          onClick={onClose}
           className="flex items-center gap-3 p-3 rounded hover:bg-gray-100"
         >
           <Target size={20} />

@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import Sidebar from "../components/Sidebar";
+import Layout from "../components/Layout";
 import StatsCard from "../components/StatsCard";
 import { getJobReadiness } from "../services/jobReadinessService";
 import { getGitHubHistory } from "../services/githubAnalyzerService";
@@ -50,16 +50,15 @@ function Dashboard() {
   };
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <main className="flex-1 p-8 bg-gray-50 min-h-screen">
+    <Layout>
+      <div className="p-4 md:p-8">
         
         {/* Welcome Section */}
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold">
+        <div className="mb-8 md:mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold">
             Welcome back, {user?.user?.name || user?.name} 👋
           </h1>
-          <p className="text-gray-500 mt-2 text-lg">
+          <p className="text-gray-500 mt-2 text-base md:text-lg">
             Track your career growth with AI-powered insights.
           </p>
         </div>
@@ -71,7 +70,7 @@ function Dashboard() {
         ) : (
           <>
             {/* Dashboard Metrics */}
-            <div className="grid md:grid-cols-4 gap-6 mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-10">
               <StatsCard 
                 title="Resume Score" 
                 value={data?.factors?.resumeScore > 0 ? data.factors.resumeScore : "0"} 
@@ -143,8 +142,8 @@ function Dashboard() {
           </>
         )}
 
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
 
