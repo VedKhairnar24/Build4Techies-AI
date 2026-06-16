@@ -35,7 +35,7 @@ app.use("/api/roadmap", roadmapRoutes);
 app.use("/api/github", githubRoutes);
 app.use("/api/opensource", openSourceRoutes);
 app.use("/api/job-readiness", jobReadinessRoutes);
-
+app.use("/api/test", require("./src/routes/testRoute"));
 
 app.get("/", (req, res) => {
   res.json({

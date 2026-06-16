@@ -19,10 +19,10 @@ const analyzeResume = async (req, res) => {
     }
 
     const aiResponse = await analyzeResumeWithAI(
-      resume.extractedText
+      resume.resumeText
     );
 
-    const parsed = JSON.parse(aiResponse);
+    const parsed = aiResponse;
 
     const analysis = await ResumeAnalysis.create({
       userId: req.user.id,

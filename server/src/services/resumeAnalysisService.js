@@ -22,29 +22,24 @@ Resume:
 ${resumeText}
 `;
 
-  const response = await client.chat.completions.create({
-    model: "llama3.1-8b",
-    messages: [
-      {
-        role: "user",
-        content: prompt,
-      },
-    ],
-  });
-
-  const content = response.choices[0].message.content;
-
   try {
+    const response = await client.chat.completions.create({
+      model: "llama3.1-8b",
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    });
+
+    const content = response.choices[0].message.content;
+
     const cleanContent = content.replace(/```json/g, "").replace(/```/g, "").trim();
     return JSON.parse(cleanContent);
   } catch (error) {
-    console.error("JSON parse error from Cerebras:", error);
-    return {
-      atsScore: 0,
-      strengths: [],
-      weaknesses: [],
-      suggestions: [],
-    };
+    console.error("Cerebras Error:", error);
+    throw error;
   }
 };
 
