@@ -5,11 +5,11 @@ import {
   LayoutDashboard,
   User,
   FileText,
-  Github,
   Briefcase,
   Target,
   LogOut,
 } from "lucide-react";
+import { Github } from "./Icons";
 import toast from "react-hot-toast";
 
 function Sidebar({ onClose }) {

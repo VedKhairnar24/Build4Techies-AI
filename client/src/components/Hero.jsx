@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { FileText, Map, Github, Code } from "lucide-react";
+import { FileText, Map, Code } from "lucide-react";
+import { Github } from "./Icons";
 
 function Hero() {
   return (

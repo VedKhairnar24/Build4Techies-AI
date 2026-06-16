@@ -1,4 +1,5 @@
-import { FileText, Map, Github, BookOpen } from "lucide-react";
+import { FileText, Map, BookOpen } from "lucide-react";
+import { Github } from "./Icons";
 
 function Features() {
   const features = [

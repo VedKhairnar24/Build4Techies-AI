@@ -1,4 +1,5 @@
-import { Target, FileText, Github, Briefcase, Award } from "lucide-react";
+import { Target, FileText, Briefcase, Award } from "lucide-react";
+import { Github } from "./Icons";
 
 function Modules() {
   const modules = [
