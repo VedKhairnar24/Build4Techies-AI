@@ -77,10 +77,6 @@ Resume Stored as Text
 POST /api/resume/analyze
        ↓
 Show ATS Score & Suggestions
-       ↓
-GET /api/analysis/history
-       ↓
-Show Previous Analyses
 ```
 
 ### `POST /api/resume/upload`
@@ -112,10 +108,6 @@ Show Previous Analyses
   }
 }
 ```
-
-### `GET /api/analysis/history`
-**Purpose:** Retrieve all previous AI resume analyses
-**Headers:** `Authorization: Bearer <token>`
 
 ---
 
