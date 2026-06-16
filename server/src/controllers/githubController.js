@@ -47,11 +47,15 @@ const analyzeGitHub = async (req, res) => {
       analysis,
     });
   } catch (error) {
-    console.error(error);
+    console.error(
+      "GitHub Error:",
+      error.response?.data || error
+    );
 
     res.status(500).json({
       success: false,
       message: error.message,
+      details: error.response?.data,
     });
   }
 };
