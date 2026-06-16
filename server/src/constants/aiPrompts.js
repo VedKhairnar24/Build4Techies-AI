@@ -33,16 +33,15 @@ Return ONLY valid JSON.
 `,
 
   GITHUB_ANALYSIS: `
+Analyze this GitHub profile.
+
 Return ONLY valid JSON.
 
 {
-  "skillLevel":"",
-  "strongAreas":[],
-  "weakAreas":[],
-  "recommendedTechnologies":[],
-  "projectSuggestions":[],
-  "openSourceReadiness":"",
-  "portfolioScore":0
+  "githubScore": 0,
+  "strengths": [],
+  "weaknesses": [],
+  "suggestions": []
 }
 `,
 

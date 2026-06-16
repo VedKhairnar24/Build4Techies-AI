@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import ResumeAnalysis from "./pages/ResumeAnalysis";
 import Roadmap from "./pages/Roadmap";
 import JobReadiness from "./pages/JobReadiness";
+import GitHubAnalyzer from "./pages/GitHubAnalyzer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/resume" element={<ResumeAnalysis />} />
         <Route path="/roadmap" element={<Roadmap />} />
         <Route path="/job-readiness" element={<JobReadiness />} />
+        <Route path="/github" element={<GitHubAnalyzer />} />
       </Routes>
     </BrowserRouter>
   );

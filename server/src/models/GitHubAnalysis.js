@@ -2,28 +2,23 @@ const mongoose = require("mongoose");
 
 const githubAnalysisSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
 
-    githubUsername: {
+    username: {
       type: String,
       required: true,
     },
 
-    profileData: {
-      type: Object,
-      default: {},
+    githubScore: {
+      type: Number,
+      default: 0,
     },
 
-    repositories: {
-      type: Array,
-      default: [],
-    },
-
-    aiInsights: {
+    analysis: {
       type: Object,
       default: {},
     },

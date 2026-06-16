@@ -1,18 +1,27 @@
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getJobReadiness } from "../services/jobReadinessService";
+import { getGitHubHistory } from "../services/githubAnalyzerService";
 
 function DashboardCards() {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
+  const [githubScore, setGithubScore] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         if (user?.token) {
-          const res = await getJobReadiness(user.token);
-          setData(res);
+          const [readinessRes, githubRes] = await Promise.all([
+            getJobReadiness(user.token).catch(() => null),
+            getGitHubHistory(user.token).catch(() => null)
+          ]);
+          
+          if (readinessRes) setData(readinessRes);
+          if (githubRes?.history?.length > 0) {
+            setGithubScore(githubRes.history[0].githubScore || 0);
+          }
         }
       } catch (err) {
         console.error("Failed to fetch dashboard stats", err);
@@ -29,6 +38,10 @@ function DashboardCards() {
       value: loading ? "..." : (data?.factors?.resumeScore > 0 ? data.factors.resumeScore : "0"),
     },
     {
+      title: "GitHub Score",
+      value: loading ? "..." : githubScore.toString(),
+    },
+    {
       title: "Job Readiness",
       value: loading ? "..." : (data?.score || "0"),
     },
@@ -43,7 +56,7 @@ function DashboardCards() {
   ];
 
   return (
-    <div className="grid md:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
       {cards.map((card, index) => (
         <div
           key={index}
