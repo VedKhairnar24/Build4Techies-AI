@@ -11,6 +11,7 @@ import JobReadiness from "./pages/JobReadiness";
 import GitHubAnalyzer from "./pages/GitHubAnalyzer";
 import OpenSource from "./pages/OpenSource";
 import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/job-readiness" element={<ProtectedRoute><JobReadiness /></ProtectedRoute>} />
         <Route path="/github" element={<ProtectedRoute><GitHubAnalyzer /></ProtectedRoute>} />
         <Route path="/opensource" element={<ProtectedRoute><OpenSource /></ProtectedRoute>} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

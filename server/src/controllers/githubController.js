@@ -80,6 +80,13 @@ const analyzeGitHub = async (req, res) => {
   } catch (error) {
     console.error("GitHub Analysis Error:", error);
 
+    if (error.response && error.response.status === 404) {
+      return res.status(404).json({
+        success: false,
+        message: "GitHub profile not found"
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: error.message,

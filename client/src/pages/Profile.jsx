@@ -9,6 +9,7 @@ import {
 } from "../context/AuthContext";
 
 import Layout from "../components/Layout";
+import handleApiError from "../utils/handleApiError";
 
   getProfile,
   updateProfile,
@@ -97,7 +98,7 @@ function Profile() {
         toast.success("Profile updated successfully");
       } catch (error) {
         console.error(error);
-        toast.error("Failed to update profile");
+        handleApiError(error, "Failed to update profile");
       } finally {
         setLoading(false);
       }

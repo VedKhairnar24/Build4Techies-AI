@@ -5,6 +5,7 @@ import {
   registerUser,
 } from "../services/authService";
 import toast from "react-hot-toast";
+import handleApiError from "../utils/handleApiError";
 
 function Register() {
 
@@ -42,7 +43,7 @@ function Register() {
         navigate("/login");
       } catch (error) {
         console.error(error);
-        toast.error(error.response?.data?.message || "Registration failed");
+        handleApiError(error, "Registration failed");
       } finally {
         setLoading(false);
       }

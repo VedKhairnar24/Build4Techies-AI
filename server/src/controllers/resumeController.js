@@ -59,7 +59,7 @@ const analyzeResume = async (req, res) => {
     if (!resume) {
       return res.status(404).json({
         success: false,
-        message: "Resume not found",
+        message: "Please upload a resume first",
       });
     }
 

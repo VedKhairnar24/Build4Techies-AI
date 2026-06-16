@@ -4,6 +4,8 @@ import { getRecommendations, getRecommendationHistory } from "../services/openSo
 import Layout from "../components/Layout";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
+import handleApiError from "../utils/handleApiError";
 
 function OpenSource() {
   const { user } = useContext(AuthContext);
@@ -37,11 +39,9 @@ function OpenSource() {
       const res = await getRecommendations(user.token);
       setRepositories(res.repositories);
       toast.success("Recommendations generated");
-    } catch (err) {
-      console.error(err);
-      const errMsg = err.response?.data?.message || "Failed to generate recommendations.";
-      setError(errMsg);
-      toast.error(errMsg);
+    } catch (error) {
+      console.error(error);
+      handleApiError(error, "Failed to generate recommendations");
     } finally {
       setLoading(false);
     }
@@ -144,6 +144,13 @@ function OpenSource() {
               </div>
             ))}
           </div>
+        )}
+
+        {(!repositories || repositories.length === 0) && !loading && !initialLoading && (
+          <EmptyState
+            title="No Recommendations"
+            description="Generate recommendations first."
+          />
         )}
       </div>
     </Layout>

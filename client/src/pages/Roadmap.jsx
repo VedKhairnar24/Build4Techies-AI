@@ -4,6 +4,8 @@ import { generateRoadmap, getRoadmapHistory } from "../services/roadmapService";
 import Layout from "../components/Layout";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
+import handleApiError from "../utils/handleApiError";
 
 function Roadmap() {
   const { user } = useContext(AuthContext);
@@ -36,11 +38,9 @@ function Roadmap() {
       const result = await generateRoadmap(user.token);
       setRoadmapData(result.roadmap.roadmap);
       toast.success("Roadmap generated");
-    } catch (err) {
-      console.error(err);
-      const errMsg = err.response?.data?.message || "Failed to generate roadmap.";
-      setError(errMsg);
-      toast.error(errMsg);
+    } catch (error) {
+      console.error(error);
+      handleApiError(error, "Failed to generate roadmap");
     } finally {
       setLoading(false);
     }
@@ -142,6 +142,13 @@ function Roadmap() {
               </div>
             </div>
           </div>
+        )}
+
+        {!roadmapData && !loading && !initialLoading && (
+          <EmptyState
+            title="No Roadmap Generated"
+            description="Generate your career roadmap."
+          />
         )}
       </div>
     </Layout>

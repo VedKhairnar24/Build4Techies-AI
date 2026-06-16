@@ -4,6 +4,8 @@ import { uploadResume, analyzeResume } from "../services/resumeService";
 import Layout from "../components/Layout";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
+import handleApiError from "../utils/handleApiError";
 
 function ResumeAnalysis() {
   const { user } = useContext(AuthContext);
@@ -21,7 +23,7 @@ function ResumeAnalysis() {
       toast.success("Resume uploaded successfully");
     } catch (error) {
       console.error(error);
-      toast.error("Resume upload failed");
+      handleApiError(error, "Resume upload failed");
     } finally {
       setLoading(false);
     }
@@ -35,7 +37,7 @@ function ResumeAnalysis() {
       toast.success("Analysis completed");
     } catch (error) {
       console.error(error);
-      toast.error("Failed to analyze resume");
+      handleApiError(error, "Failed to analyze resume");
     } finally {
       setLoading(false);
     }
@@ -139,6 +141,13 @@ function ResumeAnalysis() {
               </ul>
             </div>
           </div>
+        )}
+
+        {!analysis && !loading && (
+          <EmptyState
+            title="No Analysis Yet"
+            description="Upload a resume and analyze it."
+          />
         )}
       </div>
     </Layout>

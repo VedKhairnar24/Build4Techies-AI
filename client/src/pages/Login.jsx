@@ -12,6 +12,7 @@ import {
 
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import handleApiError from "../utils/handleApiError";
 
 function Login() {
 
@@ -59,7 +60,7 @@ function Login() {
         navigate("/dashboard");
       } catch (error) {
         console.error(error);
-        toast.error(error.response?.data?.message || "Login failed");
+        handleApiError(error, "Login failed");
       } finally {
         setLoading(false);
       }

@@ -4,6 +4,8 @@ import { analyzeGitHub } from "../services/githubAnalyzerService";
 import Layout from "../components/Layout";
 import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
+import handleApiError from "../utils/handleApiError";
 
 function GitHubAnalyzer() {
   const { user } = useContext(AuthContext);
@@ -22,11 +24,9 @@ function GitHubAnalyzer() {
       setData(result.analysis.analysis);
       setExtraStats(result.extraStats);
       toast.success("GitHub analysis completed");
-    } catch (err) {
-      console.error(err);
-      const errMsg = err.response?.data?.message || "Failed to analyze GitHub profile.";
-      setError(errMsg);
-      toast.error(errMsg);
+    } catch (error) {
+      console.error(error);
+      handleApiError(error, "Failed to analyze GitHub profile");
     } finally {
       setLoading(false);
     }
@@ -172,6 +172,13 @@ function GitHubAnalyzer() {
               </div>
             )}
           </div>
+        )}
+
+        {!data && !loading && (
+          <EmptyState
+            title="No GitHub Analysis"
+            description="Analyze your GitHub profile."
+          />
         )}
       </div>
     </Layout>
