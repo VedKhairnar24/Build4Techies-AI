@@ -5,9 +5,9 @@ const router = express.Router();
 const protect = require("../middleware/authMiddleware");
 
 const {
-  generateScore,
+  getJobReadiness,
 } = require("../controllers/jobReadinessController");
 
-router.get("/generate", protect, generateScore);
+router.get("/", protect, getJobReadiness);
 
 module.exports = router;

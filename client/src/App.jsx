@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import ResumeAnalysis from "./pages/ResumeAnalysis";
 import Roadmap from "./pages/Roadmap";
+import JobReadiness from "./pages/JobReadiness";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/resume" element={<ResumeAnalysis />} />
         <Route path="/roadmap" element={<Roadmap />} />
+        <Route path="/job-readiness" element={<JobReadiness />} />
       </Routes>
     </BrowserRouter>
   );
