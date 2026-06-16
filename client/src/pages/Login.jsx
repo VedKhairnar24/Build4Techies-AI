@@ -29,6 +29,7 @@ function Login() {
       email: "",
       password: "",
     });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e
@@ -44,6 +45,7 @@ function Login() {
     async (e) => {
 
       e.preventDefault();
+      setLoading(true);
 
       try {
 
@@ -58,6 +60,8 @@ function Login() {
       } catch (error) {
         console.error(error);
         toast.error(error.response?.data?.message || "Login failed");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -90,9 +94,10 @@ function Login() {
         />
 
         <button
-          className="w-full bg-black text-white p-3 rounded"
+          disabled={loading}
+          className="w-full bg-black text-white p-3 rounded flex justify-center items-center gap-2 disabled:opacity-50"
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
 
       </form>

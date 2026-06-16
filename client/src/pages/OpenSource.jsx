@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { getRecommendations, getRecommendationHistory } from "../services/openSourceService";
 import Sidebar from "../components/Sidebar";
 import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
 
 function OpenSource() {
   const { user } = useContext(AuthContext);
@@ -69,6 +70,7 @@ function OpenSource() {
             disabled={loading || initialLoading}
             className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
+            {loading ? <Spinner /> : null}
             {loading ? "Generating..." : "Generate Recommendations"}
           </button>
         </div>

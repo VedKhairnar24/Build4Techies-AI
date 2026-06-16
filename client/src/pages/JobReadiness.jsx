@@ -53,8 +53,8 @@ function JobReadiness() {
         )}
 
         {loading ? (
-          <div className="flex justify-center p-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="flex justify-center items-center py-20">
+            <div className="text-gray-500 text-xl font-medium animate-pulse">Loading Job Readiness...</div>
           </div>
         ) : data ? (
           <div className="max-w-2xl mx-auto">

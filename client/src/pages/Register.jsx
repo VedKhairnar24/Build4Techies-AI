@@ -17,6 +17,7 @@ function Register() {
       email: "",
       password: "",
     });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (
     e
@@ -32,6 +33,7 @@ function Register() {
     async (e) => {
 
       e.preventDefault();
+      setLoading(true);
 
       try {
 
@@ -41,6 +43,8 @@ function Register() {
       } catch (error) {
         console.error(error);
         toast.error(error.response?.data?.message || "Registration failed");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -81,9 +85,10 @@ function Register() {
         />
 
         <button
-          className="w-full bg-black text-white p-3 rounded"
+          disabled={loading}
+          className="w-full bg-black text-white p-3 rounded flex justify-center items-center gap-2 disabled:opacity-50"
         >
-          Register
+          {loading ? "Creating Account..." : "Register"}
         </button>
 
       </form>

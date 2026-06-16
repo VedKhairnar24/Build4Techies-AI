@@ -38,26 +38,34 @@ function DashboardCards() {
     fetchStats();
   }, [user]);
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center py-20">
+        <div className="text-gray-500 text-xl font-medium animate-pulse">Loading Dashboard...</div>
+      </div>
+    );
+  }
+
   const cards = [
     {
       title: "Resume Score",
-      value: loading ? "..." : (data?.factors?.resumeScore > 0 ? data.factors.resumeScore : "0"),
+      value: (data?.factors?.resumeScore > 0 ? data.factors.resumeScore : "0"),
     },
     {
       title: "GitHub Score",
-      value: loading ? "..." : githubScore.toString(),
+      value: githubScore.toString(),
     },
     {
       title: "Job Readiness",
-      value: loading ? "..." : (data?.score || "0"),
+      value: (data?.score || "0"),
     },
     {
       title: "Recommended Repos",
-      value: loading ? "..." : openSourceCount.toString(),
+      value: openSourceCount.toString(),
     },
     {
       title: "Skills",
-      value: loading ? "..." : (data?.factors?.skillsCount || "0"),
+      value: (data?.factors?.skillsCount || "0"),
     },
   ];
 

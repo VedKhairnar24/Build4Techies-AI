@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { generateRoadmap, getRoadmapHistory } from "../services/roadmapService";
 import Sidebar from "../components/Sidebar";
 import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
 
 function Roadmap() {
   const { user } = useContext(AuthContext);
@@ -56,9 +57,10 @@ function Roadmap() {
           </div>
           <button 
             onClick={handleGenerate} 
-            disabled={loading || careerGoal === "Not Set"}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loading || initialLoading || careerGoal === "Not Set"}
+            className="bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
           >
+            {loading ? <Spinner /> : null}
             {loading ? "Generating..." : "Generate Roadmap"}
           </button>
         </div>

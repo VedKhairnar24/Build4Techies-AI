@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { uploadResume, analyzeResume } from "../services/resumeService";
 import Sidebar from "../components/Sidebar";
 import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
 
 function ResumeAnalysis() {
   const { user } = useContext(AuthContext);
@@ -63,16 +64,18 @@ function ResumeAnalysis() {
               <button 
                 onClick={handleUpload} 
                 disabled={!file || loading}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
-                Upload PDF
+                {loading && file ? <Spinner /> : null}
+                {loading && file ? "Uploading..." : "Upload Resume"}
               </button>
               <button 
                 onClick={handleAnalyze} 
                 disabled={loading}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
-                Analyze Resume
+                {loading && !file ? <Spinner /> : null}
+                {loading && !file ? "Analyzing..." : "Analyze Resume"}
               </button>
             </div>
           </div>

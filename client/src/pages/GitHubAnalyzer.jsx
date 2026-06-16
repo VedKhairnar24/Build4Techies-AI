@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { analyzeGitHub } from "../services/githubAnalyzerService";
 import Sidebar from "../components/Sidebar";
 import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
 
 function GitHubAnalyzer() {
   const { user } = useContext(AuthContext);
@@ -52,6 +53,7 @@ function GitHubAnalyzer() {
               disabled={!username || loading}
               className="bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             >
+              {loading ? <Spinner /> : null}
               {loading ? "Analyzing..." : "Analyze"}
             </button>
           </div>

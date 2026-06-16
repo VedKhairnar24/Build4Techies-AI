@@ -27,6 +27,8 @@ function Profile() {
       skills: "",
       careerGoal: "",
     });
+  const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     loadProfile();
@@ -59,6 +61,8 @@ function Profile() {
 
       } catch (error) {
         console.error(error);
+      } finally {
+        setInitialLoading(false);
       }
     };
 
@@ -78,6 +82,7 @@ function Profile() {
     async (e) => {
 
       e.preventDefault();
+      setLoading(true);
 
       try {
 
@@ -93,6 +98,8 @@ function Profile() {
       } catch (error) {
         console.error(error);
         toast.error("Failed to update profile");
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -107,10 +114,15 @@ function Profile() {
           Profile
         </h1>
 
-        <form
-          onSubmit={handleSubmit}
-          className="max-w-2xl bg-white border rounded-xl p-8"
-        >
+        {initialLoading ? (
+          <div className="flex justify-center items-center py-20">
+            <div className="text-gray-500 text-xl font-medium animate-pulse">Loading Profile...</div>
+          </div>
+        ) : (
+          <form
+            onSubmit={handleSubmit}
+            className="max-w-2xl bg-white border rounded-xl p-8"
+          >
 
           <input
             type="text"
@@ -149,12 +161,14 @@ function Profile() {
           />
 
           <button
-            className="bg-black text-white px-6 py-3 rounded"
+            disabled={loading}
+            className="bg-black text-white px-6 py-3 rounded flex justify-center items-center gap-2 disabled:opacity-50"
           >
-            Save Profile
+            {loading ? "Saving..." : "Save Profile"}
           </button>
 
         </form>
+        )}
 
       </main>
 
