@@ -23,8 +23,13 @@ ${resumeText}
 `;
 
   try {
+    console.log(
+      "Using model:",
+      process.env.CEREBRAS_MODEL
+    );
+
     const response = await client.chat.completions.create({
-      model: "llama3.1-8b",
+      model: process.env.CEREBRAS_MODEL,
       messages: [
         {
           role: "user",
