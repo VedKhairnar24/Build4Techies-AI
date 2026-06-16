@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const ResumeAnalysis = require("../models/ResumeAnalysis");
+const Resume = require("../models/Resume");
 const GitHubAnalysis = require("../models/GitHubAnalysis");
 const { calculateJobReadinessScore } = require("../services/jobReadinessService");
 
@@ -7,8 +7,8 @@ const generateScore = async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
 
-    const latestResume = await ResumeAnalysis.findOne({
-      userId: user._id,
+    const latestResume = await Resume.findOne({
+      user: user._id,
     }).sort({
       createdAt: -1,
     });
@@ -21,12 +21,14 @@ const generateScore = async (req, res) => {
 
     const score = calculateJobReadinessScore({
       atsScore: latestResume?.atsScore || 0,
-      githubScore: latestGithub?.aiInsights?.portfolioScore || 0,
+      githubScore:
+        latestGithub?.aiInsights?.portfolioScore || 0,
       skillsCount: user.skills.length,
       careerGoal: user.careerGoal,
     });
 
     user.jobReadinessScore = score;
+
     await user.save();
 
     res.json({
