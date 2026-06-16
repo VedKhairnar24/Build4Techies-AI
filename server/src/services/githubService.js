@@ -24,6 +24,14 @@ const getGitHubProfile = async (username) => {
   };
 };
 
+const searchRepositories = async (query) => {
+  const response = await githubApi.get(
+    `/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc&per_page=10`
+  );
+  return response.data.items;
+};
+
 module.exports = {
   getGitHubProfile,
+  searchRepositories,
 };

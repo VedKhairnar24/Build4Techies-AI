@@ -31,7 +31,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use("/api/roadmap", roadmapRoutes);
 app.use("/api/github", githubRoutes);
-app.use("/api/opensource", openSourceRoutes);
+app.use("/api/open-source", openSourceRoutes);
 app.use("/api/job-readiness", jobReadinessRoutes);
 app.use("/api/test", require("./src/routes/testRoute"));
 

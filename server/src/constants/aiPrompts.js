@@ -46,20 +46,21 @@ Return ONLY valid JSON.
 `,
 
   OPEN_SOURCE_RECOMMENDATION: `
+Rank these repositories for the user based on their skills and goals.
+
 Return ONLY valid JSON.
 
 {
-  "repositories": [
+  "recommended": [
     {
       "name":"",
+      "stars":0,
+      "reason":"",
       "difficulty":"",
-      "reason":""
+      "description":"",
+      "language":""
     }
-  ],
-
-  "learningPath": [],
-
-  "contributionTips": []
+  ]
 }
 `
 };

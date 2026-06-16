@@ -2,25 +2,31 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getJobReadiness } from "../services/jobReadinessService";
 import { getGitHubHistory } from "../services/githubAnalyzerService";
+import { getRecommendationHistory } from "../services/openSourceService";
 
 function DashboardCards() {
   const { user } = useContext(AuthContext);
   const [data, setData] = useState(null);
   const [githubScore, setGithubScore] = useState(0);
+  const [openSourceCount, setOpenSourceCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         if (user?.token) {
-          const [readinessRes, githubRes] = await Promise.all([
+          const [readinessRes, githubRes, osRes] = await Promise.all([
             getJobReadiness(user.token).catch(() => null),
-            getGitHubHistory(user.token).catch(() => null)
+            getGitHubHistory(user.token).catch(() => null),
+            getRecommendationHistory(user.token).catch(() => null)
           ]);
           
           if (readinessRes) setData(readinessRes);
           if (githubRes?.history?.length > 0) {
             setGithubScore(githubRes.history[0].githubScore || 0);
+          }
+          if (osRes?.history?.length > 0) {
+            setOpenSourceCount(osRes.history[0].repositories?.length || 0);
           }
         }
       } catch (err) {
@@ -46,8 +52,8 @@ function DashboardCards() {
       value: loading ? "..." : (data?.score || "0"),
     },
     {
-      title: "Roadmaps",
-      value: loading ? "..." : (data?.factors?.roadmapGenerated ? "1" : "0"),
+      title: "Recommended Repos",
+      value: loading ? "..." : openSourceCount.toString(),
     },
     {
       title: "Skills",

@@ -2,17 +2,16 @@ const mongoose = require("mongoose");
 
 const recommendationSchema = new mongoose.Schema(
   {
-    userId: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
 
-    skills: [String],
-
-    careerGoal: String,
-
-    recommendations: Object,
+    repositories: {
+      type: Array,
+      default: [],
+    },
   },
   {
     timestamps: true,
