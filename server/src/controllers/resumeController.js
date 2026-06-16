@@ -34,12 +34,12 @@ const uploadResume = async (
         "Resume processed successfully",
     });
   } catch (error) {
-    console.error(error);
+    console.error("Upload Error:", error);
 
     return res.status(500).json({
       success: false,
-      message:
-        "Resume upload failed",
+      message: error.message,
+      error: error.stack
     });
   }
 };
