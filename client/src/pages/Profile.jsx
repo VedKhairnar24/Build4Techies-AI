@@ -10,7 +10,7 @@ import {
 
 import Layout from "../components/Layout";
 import handleApiError from "../utils/handleApiError";
-
+import {
   getProfile,
   updateProfile,
 } from "../services/profileService";
