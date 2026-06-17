@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
 import EmptyState from "../components/EmptyState";
 import handleApiError from "../utils/handleApiError";
+import { UI } from "../constants/ui";
 
 function Roadmap() {
   const { user } = useContext(AuthContext);
@@ -48,19 +49,24 @@ function Roadmap() {
 
   return (
     <Layout>
-      <div className="p-4 md:p-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">Career Roadmap</h1>
+      <div className="max-w-7xl mx-auto">
+        <div className={UI.pageContainer}>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+            <div>
+              <h1 className={`${UI.pageTitle} mb-2`}>Career Roadmap</h1>
             <p className="text-gray-600 text-lg">Goal: <span className="font-semibold text-gray-800">{careerGoal}</span></p>
           </div>
           <button 
             onClick={handleGenerate} 
             disabled={loading || careerGoal === "Not Set"}
-            className="w-full sm:w-auto bg-black text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2 mt-4 md:mt-0"
+            className={`${UI.buttonPrimary} flex justify-center items-center gap-2 mt-4 md:mt-0 disabled:opacity-50`}
           >
-            {loading ? <Spinner /> : null}
-            {loading ? "Generating..." : "Generate Roadmap"}
+            {loading ? (
+              <>
+                <Spinner />
+                Generating...
+              </>
+            ) : "Generate Roadmap"}
           </button>
         </div>
 
@@ -71,9 +77,9 @@ function Roadmap() {
         )}
 
         {loading && (
-          <div className="flex flex-col items-center justify-center p-16">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-600 mb-4"></div>
-            <p className="text-gray-500">Our AI is crafting your personalized roadmap...</p>
+          <div className="flex flex-col items-center justify-center p-16 gap-2">
+            <Spinner />
+            <p className="text-gray-500 font-medium">Our AI is crafting your personalized roadmap...</p>
           </div>
         )}
 
@@ -84,8 +90,8 @@ function Roadmap() {
               <h2 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">Timeline</h2>
               <div className="space-y-6">
                 {roadmapData.timeline?.map((phase, idx) => (
-                  <div key={idx} className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 relative">
-                    <div className="absolute top-0 left-0 w-2 h-full bg-blue-500 rounded-l-xl"></div>
+                  <div key={idx} className={`${UI.card} relative overflow-hidden`}>
+                    <div className="absolute top-0 left-0 w-2 h-full bg-blue-500"></div>
                     <h3 className="text-xl font-bold mb-3 text-blue-800">{phase.month}</h3>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                       {phase.topics?.map((topic, i) => (
@@ -103,7 +109,7 @@ function Roadmap() {
             {/* Side Column */}
             <div className="space-y-8">
               {/* Projects */}
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className={UI.card}>
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Projects</h2>
                 <ul className="space-y-3">
                   {roadmapData.projects?.map((project, idx) => (
@@ -116,7 +122,7 @@ function Roadmap() {
               </div>
 
               {/* Certifications */}
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className={UI.card}>
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Certifications</h2>
                 <ul className="space-y-3">
                   {roadmapData.certifications?.map((cert, idx) => (
@@ -129,7 +135,7 @@ function Roadmap() {
               </div>
 
               {/* Open Source */}
-              <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className={UI.card}>
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Open Source</h2>
                 <ul className="space-y-3">
                   {roadmapData.openSource?.map((os, idx) => (
@@ -150,6 +156,7 @@ function Roadmap() {
             description="Generate your career roadmap."
           />
         )}
+        </div>
       </div>
     </Layout>
   );

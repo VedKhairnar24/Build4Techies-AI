@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
 import EmptyState from "../components/EmptyState";
 import handleApiError from "../utils/handleApiError";
+import { UI } from "../constants/ui";
 
 function ResumeAnalysis() {
   const { user } = useContext(AuthContext);
@@ -45,11 +46,12 @@ function ResumeAnalysis() {
 
   return (
     <Layout>
-      <div className="p-4 md:p-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">Resume Analysis</h1>
-        
-        <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-100">
-          <div className="flex flex-col gap-4 w-full max-w-md">
+      <div className="max-w-7xl mx-auto">
+        <div className={UI.pageContainer}>
+          <h1 className={`${UI.pageTitle} mb-8`}>Resume Analysis</h1>
+          
+          <div className={`${UI.card} mb-8`}>
+            <div className="flex flex-col gap-4 w-full max-w-md">
             <input 
               type="file" 
               accept=".pdf"
@@ -65,31 +67,40 @@ function ResumeAnalysis() {
               <button 
                 onClick={handleUpload} 
                 disabled={!file || loading}
-                className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                className={`${UI.buttonPrimary} flex justify-center items-center gap-2 disabled:opacity-50`}
               >
-                {loading && file ? <Spinner /> : null}
-                {loading && file ? "Uploading..." : "Upload PDF"}
+                {loading && file ? (
+                  <>
+                    <Spinner />
+                    Uploading...
+                  </>
+                ) : "Upload PDF"}
               </button>
               <button 
                 onClick={handleAnalyze} 
                 disabled={loading}
-                className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                className={`${UI.buttonPrimary} flex justify-center items-center gap-2 disabled:opacity-50`}
               >
-                {loading && !file ? <Spinner /> : null}
-                {loading && !file ? "Analyzing..." : "Analyze Resume"}
+                {loading && !file ? (
+                  <>
+                    <Spinner />
+                    Analyzing...
+                  </>
+                ) : "Analyze Resume"}
               </button>
             </div>
           </div>
         </div>
 
         {loading && (
-          <div className="flex items-center justify-center p-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          <div className="flex items-center justify-center p-12 gap-2">
+            <Spinner />
+            <div className="text-gray-500 font-medium">Loading...</div>
           </div>
         )}
 
         {analysis && !loading && (
-          <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+          <div className={`${UI.card} mb-8`}>
             <h2 className="text-3xl font-bold mb-8 text-gray-800">
               ATS Score: <span className={analysis.atsScore >= 70 ? "text-green-600" : "text-orange-500"}>{analysis.atsScore}/100</span>
             </h2>
@@ -149,6 +160,7 @@ function ResumeAnalysis() {
             description="Upload a resume and analyze it."
           />
         )}
+        </div>
       </div>
     </Layout>
   );

@@ -6,6 +6,8 @@ import StatsCard from "../components/StatsCard";
 import { getJobReadiness } from "../services/jobReadinessService";
 import { getGitHubHistory } from "../services/githubAnalyzerService";
 import { getRecommendationHistory } from "../services/openSourceService";
+import { UI } from "../constants/ui";
+import Spinner from "../components/Spinner";
 
 function Dashboard() {
   const { user } = useContext(AuthContext);
@@ -51,26 +53,28 @@ function Dashboard() {
 
   return (
     <Layout>
-      <div className="p-4 md:p-8">
-        
-        {/* Welcome Section */}
-        <div className="mb-8 md:mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold">
-            Welcome back, {user?.user?.name || user?.name} 👋
-          </h1>
-          <p className="text-gray-500 mt-2 text-base md:text-lg">
-            Track your career growth with AI-powered insights.
-          </p>
-        </div>
+      <div className="max-w-7xl mx-auto">
+        <div className={UI.pageContainer}>
+          
+          {/* Welcome Section */}
+          <div className="mb-8">
+            <h1 className={UI.pageTitle}>
+              Welcome back, {user?.user?.name || user?.name} 👋
+            </h1>
+            <p className="text-gray-500 mt-2 text-base md:text-lg">
+              Track your career growth with AI-powered insights.
+            </p>
+          </div>
 
         {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="text-gray-500 text-xl font-medium animate-pulse">Loading Dashboard...</div>
+          <div className="flex justify-center items-center py-20 gap-2">
+            <Spinner />
+            <div className="text-gray-500 text-xl font-medium">Loading...</div>
           </div>
         ) : (
           <>
             {/* Dashboard Metrics */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-6 mb-8">
               <StatsCard 
                 title="Resume Score" 
                 value={data?.factors?.resumeScore > 0 ? data.factors.resumeScore : "0"} 
@@ -94,19 +98,19 @@ function Dashboard() {
             </div>
 
             {/* Quick Actions */}
-            <div className="mb-10">
-              <h2 className="text-2xl font-bold mb-6">Quick Actions</h2>
+            <div className="mb-8">
+              <h2 className={UI.sectionTitle}>Quick Actions</h2>
               <div className="grid md:grid-cols-4 gap-4">
-                <Link to="/resume" className="bg-white border rounded-xl p-4 text-center hover:shadow-md transition-shadow font-medium text-gray-800">
+                <Link to="/resume" className={`${UI.card} text-center hover:shadow-md transition-shadow font-medium text-gray-800`}>
                   Upload Resume
                 </Link>
-                <Link to="/roadmap" className="bg-white border rounded-xl p-4 text-center hover:shadow-md transition-shadow font-medium text-gray-800">
+                <Link to="/roadmap" className={`${UI.card} text-center hover:shadow-md transition-shadow font-medium text-gray-800`}>
                   Generate Roadmap
                 </Link>
-                <Link to="/github" className="bg-white border rounded-xl p-4 text-center hover:shadow-md transition-shadow font-medium text-gray-800">
+                <Link to="/github" className={`${UI.card} text-center hover:shadow-md transition-shadow font-medium text-gray-800`}>
                   Analyze GitHub
                 </Link>
-                <Link to="/opensource" className="bg-white border rounded-xl p-4 text-center hover:shadow-md transition-shadow font-medium text-gray-800">
+                <Link to="/opensource" className={`${UI.card} text-center hover:shadow-md transition-shadow font-medium text-gray-800`}>
                   Explore Open Source
                 </Link>
               </div>
@@ -114,9 +118,9 @@ function Dashboard() {
 
             {/* Recent Activity Section */}
             <div>
-              <h2 className="text-2xl font-bold mb-6">Recent Activity</h2>
+              <h2 className={UI.sectionTitle}>Recent Activity</h2>
               {data?.factors?.resumeScore > 0 ? (
-                <div className="bg-white border rounded-xl p-6 flex flex-col gap-4">
+                <div className={`${UI.card} flex flex-col gap-4`}>
                   <div className="flex items-center gap-3">
                     <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                     <p className="text-gray-700">Resume analyzed recently</p>
@@ -131,7 +135,7 @@ function Dashboard() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-white border border-dashed border-gray-300 rounded-xl p-8 text-center">
+                <div className={`${UI.card} border-dashed border-gray-300 p-8 text-center`}>
                   <p className="text-gray-500 mb-2">No resume uploaded yet.</p>
                   <Link to="/resume" className="text-blue-600 font-medium hover:underline">
                     Upload your first resume.
@@ -142,6 +146,7 @@ function Dashboard() {
           </>
         )}
 
+        </div>
       </div>
     </Layout>
   );

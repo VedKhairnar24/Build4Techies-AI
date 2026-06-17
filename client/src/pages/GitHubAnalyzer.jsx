@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
 import EmptyState from "../components/EmptyState";
 import handleApiError from "../utils/handleApiError";
+import { UI } from "../constants/ui";
 
 function GitHubAnalyzer() {
   const { user } = useContext(AuthContext);
@@ -34,28 +35,33 @@ function GitHubAnalyzer() {
 
   return (
     <Layout>
-      <div className="p-4 md:p-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">GitHub Analyzer</h1>
-        
-        <div className="mb-8 p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-100">
-          <div className="flex flex-col sm:flex-row gap-4 max-w-xl">
-            <input 
-              type="text" 
-              placeholder="Enter GitHub Username (e.g. torvalds)"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="w-full border p-3 rounded-lg focus:ring-2 focus:ring-gray-900 outline-none"
-            />
-            <button 
-              onClick={handleAnalyze} 
-              disabled={!username || loading}
-              className="w-full sm:w-auto bg-gray-900 hover:bg-gray-800 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
-            >
-              {loading ? <Spinner /> : null}
-              {loading ? "Analyzing..." : "Analyze"}
-            </button>
+      <div className="max-w-7xl mx-auto">
+        <div className={UI.pageContainer}>
+          <h1 className={`${UI.pageTitle} mb-8`}>GitHub Analyzer</h1>
+          
+          <div className={`${UI.card} mb-8`}>
+            <div className="flex flex-col sm:flex-row gap-4 max-w-xl">
+              <input 
+                type="text" 
+                placeholder="Enter GitHub Username (e.g. torvalds)"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className={`${UI.input} focus:ring-2 focus:ring-gray-900 outline-none`}
+              />
+              <button 
+                onClick={handleAnalyze} 
+                disabled={!username || loading}
+                className={`${UI.buttonPrimary} flex justify-center items-center gap-2 disabled:opacity-50`}
+              >
+                {loading ? (
+                  <>
+                    <Spinner />
+                    Analyzing...
+                  </>
+                ) : "Analyze"}
+              </button>
+            </div>
           </div>
-        </div>
 
         {error && (
           <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8 max-w-xl">
@@ -64,15 +70,15 @@ function GitHubAnalyzer() {
         )}
 
         {loading && (
-          <div className="flex flex-col items-center justify-center p-16">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mb-4"></div>
-            <p className="text-gray-600">Fetching repositories and analyzing code...</p>
+          <div className="flex flex-col items-center justify-center p-16 gap-2">
+            <Spinner />
+            <p className="text-gray-600 font-medium">Fetching repositories and analyzing code...</p>
           </div>
         )}
 
         {data && !loading && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-sm border border-gray-100">
+            <div className={`lg:col-span-2 ${UI.card}`}>
               <div className="flex items-center justify-between mb-8 pb-6 border-b border-gray-100">
                 <h2 className="text-2xl font-bold text-gray-800">Analysis Results</h2>
                 <div className="text-right">
@@ -180,6 +186,7 @@ function GitHubAnalyzer() {
             description="Analyze your GitHub profile."
           />
         )}
+        </div>
       </div>
     </Layout>
   );

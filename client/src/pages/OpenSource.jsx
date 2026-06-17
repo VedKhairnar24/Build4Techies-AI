@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import Spinner from "../components/Spinner";
 import EmptyState from "../components/EmptyState";
 import handleApiError from "../utils/handleApiError";
+import { UI } from "../constants/ui";
 
 function OpenSource() {
   const { user } = useContext(AuthContext);
@@ -58,19 +59,24 @@ function OpenSource() {
 
   return (
     <Layout>
-      <div className="p-4 md:p-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-          <div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-800">Open Source Recommendations</h1>
+      <div className="max-w-7xl mx-auto">
+        <div className={UI.pageContainer}>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+              <h1 className={`${UI.pageTitle} mb-2 text-gray-800`}>Open Source Recommendations</h1>
             <p className="text-gray-500 text-lg">AI curated repositories based on your skills and career goal.</p>
           </div>
           <button 
             onClick={handleGenerate} 
             disabled={loading || initialLoading}
-            className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+            className={`${UI.buttonPrimary} flex justify-center items-center gap-2 disabled:opacity-50`}
           >
-            {loading ? <Spinner /> : null}
-            {loading ? "Generating..." : "Generate Recommendations"}
+            {loading ? (
+              <>
+                <Spinner />
+                Generating...
+              </>
+            ) : "Generate Recommendations"}
           </button>
         </div>
 
@@ -81,24 +87,16 @@ function OpenSource() {
         )}
 
         {loading && (
-          <div className="flex flex-col items-center justify-center p-16">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-purple-600 mb-6"></div>
-            <p className="text-gray-600 text-lg font-medium">Searching GitHub & Ranking Projects with AI...</p>
-          </div>
-        )}
-
-        {!loading && !initialLoading && repositories.length === 0 && !error && (
-          <div className="text-center py-20 bg-white rounded-xl border border-gray-100 shadow-sm">
-            <div className="text-6xl mb-4">🔍</div>
-            <h2 className="text-2xl font-bold text-gray-700 mb-2">No Recommendations Yet</h2>
-            <p className="text-gray-500 mb-6 max-w-md mx-auto">Click generate to let AI find the perfect open source repositories for you to contribute to.</p>
+          <div className="flex flex-col items-center justify-center p-16 gap-2">
+            <Spinner />
+            <p className="text-gray-600 font-medium">Searching GitHub & Ranking Projects with AI...</p>
           </div>
         )}
 
         {!loading && repositories.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {repositories.map((repo, idx) => (
-              <div key={idx} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col h-full hover:shadow-md transition-shadow relative overflow-hidden">
+              <div key={idx} className={`${UI.card} flex flex-col h-full hover:shadow-md transition-shadow relative overflow-hidden`}>
                 <div className="absolute top-0 left-0 w-full h-1 bg-purple-500"></div>
                 
                 <div className="flex justify-between items-start mb-4">
@@ -137,7 +135,7 @@ function OpenSource() {
                   href={repo.url} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-full text-center bg-gray-900 hover:bg-gray-800 text-white py-2 rounded-lg font-medium transition-colors mt-auto"
+                  className={`${UI.buttonPrimary} w-full text-center mt-auto`}
                 >
                   View Repository
                 </a>
@@ -152,6 +150,7 @@ function OpenSource() {
             description="Generate recommendations first."
           />
         )}
+        </div>
       </div>
     </Layout>
   );

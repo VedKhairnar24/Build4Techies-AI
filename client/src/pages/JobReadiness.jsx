@@ -2,6 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { getJobReadiness } from "../services/jobReadinessService";
 import Layout from "../components/Layout";
+import { UI } from "../constants/ui";
+import Spinner from "../components/Spinner";
+import EmptyState from "../components/EmptyState";
 
 function JobReadiness() {
   const { user } = useContext(AuthContext);
@@ -42,8 +45,9 @@ function JobReadiness() {
 
   return (
     <Layout>
-      <div className="p-4 md:p-8">
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">Job Readiness</h1>
+      <div className="max-w-7xl mx-auto">
+        <div className={UI.pageContainer}>
+          <h1 className={`${UI.pageTitle} mb-8`}>Job Readiness</h1>
 
         {error && (
           <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8">
@@ -52,12 +56,13 @@ function JobReadiness() {
         )}
 
         {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="text-gray-500 text-xl font-medium animate-pulse">Loading Job Readiness...</div>
+          <div className="flex justify-center items-center py-20 gap-2">
+            <Spinner />
+            <div className="text-gray-500 text-xl font-medium">Loading Job Readiness...</div>
           </div>
         ) : data ? (
           <div className="max-w-2xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 text-center mb-8">
+            <div className={`${UI.card} text-center mb-8`}>
               <h2 className="text-2xl text-gray-600 mb-4 font-medium">Your Score</h2>
               <div className={`text-8xl font-black mb-6 ${getScoreColor(data.score)}`}>
                 {data.score} <span className="text-3xl text-gray-400 font-bold">/ 100</span>
@@ -67,7 +72,7 @@ function JobReadiness() {
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+            <div className={UI.card}>
               <h3 className="text-2xl font-bold mb-6 border-b pb-4 text-gray-800">Factors</h3>
               
               <ul className="space-y-6">
@@ -119,7 +124,14 @@ function JobReadiness() {
               </ul>
             </div>
           </div>
-        ) : null}
+          </div>
+        ) : (
+          <EmptyState
+            title="No Data"
+            description="Could not load your job readiness score."
+          />
+        )}
+        </div>
       </div>
     </Layout>
   );

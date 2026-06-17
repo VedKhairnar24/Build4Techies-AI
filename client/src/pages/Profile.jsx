@@ -15,6 +15,8 @@ import {
   updateProfile,
 } from "../services/profileService";
 import toast from "react-hot-toast";
+import { UI } from "../constants/ui";
+import Spinner from "../components/Spinner";
 
 function Profile() {
 
@@ -110,68 +112,78 @@ function Profile() {
 
   return (
     <Layout>
-      <div className="p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className={UI.pageContainer}>
 
-        <h1 className="text-3xl md:text-4xl font-bold mb-8">
-          Profile
-        </h1>
+          <h1 className={`${UI.pageTitle} mb-8`}>
+            Profile
+          </h1>
 
-        {initialLoading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="text-gray-500 text-xl font-medium animate-pulse">Loading Profile...</div>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="w-full max-w-2xl bg-white border rounded-xl p-4 md:p-8"
-          >
+          {initialLoading ? (
+            <div className="flex justify-center items-center py-20 gap-2">
+              <Spinner />
+              <div className="text-gray-500 text-xl font-medium">Loading Profile...</div>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className={`${UI.card} w-full max-w-2xl`}
+            >
 
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Name"
-            className="w-full border p-3 mb-4 rounded"
-          />
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Name"
+              className={`${UI.input} mb-4`}
+            />
 
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            className="w-full border p-3 mb-4 rounded"
-          />
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              className={`${UI.input} mb-4`}
+            />
 
-          <input
-            type="text"
-            name="skills"
-            value={formData.skills}
-            onChange={handleChange}
-            placeholder="React, Node.js, MongoDB"
-            className="w-full border p-3 mb-4 rounded"
-          />
+            <input
+              type="text"
+              name="skills"
+              value={formData.skills}
+              onChange={handleChange}
+              placeholder="React, Node.js, MongoDB"
+              className={`${UI.input} mb-4`}
+            />
 
-          <input
-            type="text"
-            name="careerGoal"
-            value={formData.careerGoal}
-            onChange={handleChange}
-            placeholder="Full Stack Developer"
-            className="w-full border p-3 mb-4 rounded"
-          />
+            <input
+              type="text"
+              name="careerGoal"
+              value={formData.careerGoal}
+              onChange={handleChange}
+              placeholder="Full Stack Developer"
+              className={`${UI.input} mb-4`}
+            />
 
-          <button
-            disabled={loading}
-            className="bg-black text-white px-6 py-3 rounded flex justify-center items-center gap-2 disabled:opacity-50"
-          >
-            {loading ? "Saving..." : "Save Profile"}
-          </button>
+            <button
+              disabled={loading}
+              className={`${UI.buttonPrimary} flex justify-center items-center gap-2 disabled:opacity-50`}
+            >
+              {loading ? (
+                <>
+                  <Spinner />
+                  Saving...
+                </>
+              ) : (
+                "Save Profile"
+              )}
+            </button>
 
-        </form>
-        )}
+          </form>
+          )}
 
+        </div>
       </div>
     </Layout>
   );
