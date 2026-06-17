@@ -34,6 +34,7 @@ function Profile() {
   const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
+    document.title = "Build4Techies AI | Profile";
     loadProfile();
   }, []);
 
@@ -133,6 +134,7 @@ function Profile() {
             <input
               type="text"
               name="name"
+              aria-label="Name"
               value={formData.name}
               onChange={handleChange}
               placeholder="Name"
@@ -142,6 +144,7 @@ function Profile() {
             <input
               type="email"
               name="email"
+              aria-label="Email"
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
@@ -151,6 +154,7 @@ function Profile() {
             <input
               type="text"
               name="skills"
+              aria-label="Skills"
               value={formData.skills}
               onChange={handleChange}
               placeholder="React, Node.js, MongoDB"
@@ -160,6 +164,7 @@ function Profile() {
             <input
               type="text"
               name="careerGoal"
+              aria-label="Career Goal"
               value={formData.careerGoal}
               onChange={handleChange}
               placeholder="Full Stack Developer"

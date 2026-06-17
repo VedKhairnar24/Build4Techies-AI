@@ -16,6 +16,7 @@ function OpenSource() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    document.title = "Build4Techies AI | Open Source";
     const fetchHistory = async () => {
       try {
         if (user?.token) {

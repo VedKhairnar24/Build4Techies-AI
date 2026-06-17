@@ -31,6 +31,7 @@ function Navbar() {
 
         {/* Mobile Menu Button */}
         <button 
+          aria-label="Toggle Navigation Menu"
           className="md:hidden p-2"
           onClick={() => setIsOpen(!isOpen)}
         >

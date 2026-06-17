@@ -17,6 +17,7 @@ function Roadmap() {
   const careerGoal = user?.user?.careerGoal || user?.careerGoal || "Not Set";
 
   useEffect(() => {
+    document.title = "Build4Techies AI | Career Roadmap";
     const fetchHistory = async () => {
       try {
         if (user?.token) {

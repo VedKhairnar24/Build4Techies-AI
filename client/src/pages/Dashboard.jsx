@@ -17,6 +17,7 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = "Build4Techies AI | Dashboard";
     const fetchStats = async () => {
       try {
         if (user?.token) {

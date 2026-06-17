@@ -65,6 +65,7 @@ function Register() {
           <input
             type="text"
             name="name"
+            aria-label="Name"
             placeholder="Name"
             className={`${UI.input} mb-4`}
             onChange={handleChange}
@@ -73,6 +74,7 @@ function Register() {
           <input
             type="email"
             name="email"
+            aria-label="Email"
             placeholder="Email"
             className={`${UI.input} mb-4`}
             onChange={handleChange}
@@ -81,6 +83,7 @@ function Register() {
           <input
             type="password"
             name="password"
+            aria-label="Password"
             placeholder="Password"
             className={`${UI.input} mb-4`}
             onChange={handleChange}

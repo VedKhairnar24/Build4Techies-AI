@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { uploadResume, analyzeResume } from "../services/resumeService";
 import Layout from "../components/Layout";
@@ -13,6 +13,10 @@ function ResumeAnalysis() {
   const [file, setFile] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    document.title = "Build4Techies AI | Resume Analyzer";
+  }, []);
 
   const handleUpload = async () => {
     if (!file) return;
@@ -55,6 +59,7 @@ function ResumeAnalysis() {
             <input 
               type="file" 
               accept=".pdf"
+              aria-label="Upload Resume PDF"
               onChange={(e) => setFile(e.target.files[0])} 
               className="block w-full text-sm text-gray-500
                 file:mr-4 file:py-2 file:px-4

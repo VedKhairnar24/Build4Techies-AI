@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { analyzeGitHub } from "../services/githubAnalyzerService";
 import Layout from "../components/Layout";
@@ -15,6 +15,10 @@ function GitHubAnalyzer() {
   const [extraStats, setExtraStats] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    document.title = "Build4Techies AI | GitHub Analyzer";
+  }, []);
 
   const handleAnalyze = async () => {
     if (!username) return;
@@ -43,6 +47,7 @@ function GitHubAnalyzer() {
             <div className="flex flex-col sm:flex-row gap-4 max-w-xl">
               <input 
                 type="text" 
+                aria-label="GitHub Username"
                 placeholder="Enter GitHub Username (e.g. torvalds)"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}

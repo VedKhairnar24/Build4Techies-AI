@@ -13,6 +13,7 @@ function JobReadiness() {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    document.title = "Build4Techies AI | Job Readiness";
     const fetchReadiness = async () => {
       try {
         if (user?.token) {
