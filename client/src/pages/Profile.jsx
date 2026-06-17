@@ -18,7 +18,7 @@ import toast from "react-hot-toast";
 
 function Profile() {
 
-  const { user } =
+  const { user, login } =
     useContext(AuthContext);
 
   const [formData, setFormData] =
@@ -87,13 +87,17 @@ function Profile() {
 
       try {
 
-        await updateProfile(
+        const res = await updateProfile(
           {
             ...formData,
             skills: formData.skills.split(",").map((skill) => skill.trim()),
           },
           user.token
         );
+
+        if (res.user) {
+          login({ ...user, user: res.user });
+        }
 
         toast.success("Profile updated successfully");
       } catch (error) {
