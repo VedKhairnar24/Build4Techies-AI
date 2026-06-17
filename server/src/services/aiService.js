@@ -1,8 +1,9 @@
 const { Cerebras } = require("@cerebras/cerebras_cloud_sdk");
 const AI_PROMPTS = require("../constants/aiPrompts");
+const env = require("../config/env");
 
 const client = new Cerebras({
-  apiKey: process.env.CEREBRAS_API_KEY,
+  apiKey: env.CEREBRAS_API_KEY,
 });
 
 const analyzeResumeWithAI = async (resumeText) => {

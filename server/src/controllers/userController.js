@@ -1,61 +1,44 @@
 const User = require("../models/User");
+const getCurrentUser = require("../utils/getCurrentUser");
 
 const getProfile = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
+  const user = await getCurrentUser(req.user.id, "-password");
 
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "User not found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      user,
-    });
-  } catch (error) {
-    res.status(500).json({
+  if (!user) {
+    return res.status(404).json({
       success: false,
-      message: "Server error",
+      message: "User not found",
     });
   }
+
+  res.status(200).json({
+    success: true,
+    message: "Profile fetched successfully",
+    user,
+  });
 };
 
 const updateProfile = async (req, res) => {
-  try {
-    const {
-      bio,
-      skills,
-      careerGoal,
-      githubUsername,
-    } = req.body;
+  const { name, bio, skills, careerGoal, githubUsername } = req.body;
 
-    const user = await User.findByIdAndUpdate(
-      req.user.id,
-      {
-        bio,
-        skills,
-        careerGoal,
-        githubUsername,
-      },
-      {
-        returnDocument: 'after',
-      }
-    ).select("-password");
-
-    res.status(200).json({
-      success: true,
-      message: "Profile updated",
-      user,
-    });
-  } catch (error) {
-    res.status(500).json({
+  if (name !== undefined && !name?.trim()) {
+    return res.status(400).json({
       success: false,
-      message: "Server error",
+      message: "Name cannot be empty",
     });
   }
+
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { name, bio, skills, careerGoal, githubUsername },
+    { new: true }
+  ).select("-password");
+
+  res.status(200).json({
+    success: true,
+    message: "Profile updated successfully",
+    user,
+  });
 };
 
 module.exports = {

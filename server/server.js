@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-
 dotenv.config();
+
+const env = require("./src/config/env");
 
 const connectDB = require("./src/config/db");
 const authRoutes = require("./src/routes/authRoutes");
@@ -33,7 +34,6 @@ app.use("/api/roadmap", roadmapRoutes);
 app.use("/api/github", githubRoutes);
 app.use("/api/open-source", openSourceRoutes);
 app.use("/api/job-readiness", jobReadinessRoutes);
-app.use("/api/test", require("./src/routes/testRoute"));
 
 app.get("/", (req, res) => {
   res.json({
@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

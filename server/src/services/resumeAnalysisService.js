@@ -1,7 +1,9 @@
 const { Cerebras } = require("@cerebras/cerebras_cloud_sdk");
+const env = require("../config/env");
+const parseAIResponse = require("../utils/parseAIResponse");
 
 const client = new Cerebras({
-  apiKey: process.env.CEREBRAS_API_KEY,
+  apiKey: env.CEREBRAS_API_KEY,
 });
 
 const analyzeResume = async (resumeText) => {
@@ -23,13 +25,8 @@ ${resumeText}
 `;
 
   try {
-    console.log(
-      "Using model:",
-      process.env.CEREBRAS_MODEL
-    );
-
     const response = await client.chat.completions.create({
-      model: process.env.CEREBRAS_MODEL,
+      model: env.CEREBRAS_MODEL || "llama3.1-8b",
       messages: [
         {
           role: "user",
@@ -39,9 +36,7 @@ ${resumeText}
     });
 
     const content = response.choices[0].message.content;
-
-    const cleanContent = content.replace(/```json/g, "").replace(/```/g, "").trim();
-    return JSON.parse(cleanContent);
+    return parseAIResponse(content);
   } catch (error) {
     console.error("Cerebras Error:", error);
     throw error;
