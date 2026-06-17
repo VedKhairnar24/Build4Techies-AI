@@ -124,7 +124,6 @@ function JobReadiness() {
               </ul>
             </div>
           </div>
-          </div>
         ) : (
           <EmptyState
             title="No Data"
