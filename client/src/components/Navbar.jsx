@@ -9,9 +9,12 @@ function Navbar() {
     <nav className="border-b bg-white relative z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-        <h1 className="text-xl md:text-2xl font-bold">
-          Build4Techies AI
-        </h1>
+        <Link to="/" className="flex items-center gap-3">
+          <img src="/B4T-logo.png" alt="Build4Techies AI Logo" className="h-8 md:h-10 object-contain" />
+          <h1 className="text-xl md:text-2xl font-bold">
+            Build4Techies AI
+          </h1>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
@@ -30,7 +33,7 @@ function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
+        <button
           aria-label="Toggle Navigation Menu"
           className="md:hidden p-2"
           onClick={() => setIsOpen(!isOpen)}
