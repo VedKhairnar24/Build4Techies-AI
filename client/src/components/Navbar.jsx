@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "./ThemeToggle";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="border-b bg-white relative z-50">
+    <nav className="border-b border-[#262626] bg-[var(--bg)] relative z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
         <Link to="/" className="flex items-center gap-3">
@@ -18,9 +19,10 @@ function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <a href="#features" className="text-gray-600 hover:text-black">Features</a>
-          <a href="#about" className="text-gray-600 hover:text-black">About</a>
-          <Link to="/login" className="text-gray-600 hover:text-black">
+          <ThemeToggle />
+          <a href="#features" className="text-gray-600 hover:text-black dark:hover:text-white">Features</a>
+          <a href="#about" className="text-gray-600 hover:text-black dark:hover:text-white">About</a>
+          <Link to="/login" className="text-gray-600 hover:text-black dark:hover:text-white">
             Login
           </Link>
 
@@ -45,9 +47,10 @@ function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b shadow-lg py-4 px-6 flex flex-col gap-4">
-          <a href="#features" className="text-gray-600 hover:text-black py-2" onClick={() => setIsOpen(false)}>Features</a>
-          <a href="#about" className="text-gray-600 hover:text-black py-2" onClick={() => setIsOpen(false)}>About</a>
+        <div className="md:hidden absolute top-full left-0 w-full bg-[var(--bg)] border-b shadow-lg py-4 px-6 flex flex-col gap-4">
+          <ThemeToggle />
+          <a href="#features" className="text-gray-600 hover:text-white py-2" onClick={() => setIsOpen(false)}>Features</a>
+          <a href="#about" className="text-gray-600 hover:text-white py-2" onClick={() => setIsOpen(false)}>About</a>
           <Link to="/login" className="text-gray-600 hover:text-black py-2" onClick={() => setIsOpen(false)}>
             Login
           </Link>

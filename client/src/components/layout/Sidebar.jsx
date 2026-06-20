@@ -11,6 +11,8 @@ import {
 
 import { NavLink } from "react-router-dom";
 
+import ThemeToggle from "../ThemeToggle";
+
 const links = [
   {
     name: "Dashboard",
@@ -110,6 +112,10 @@ function Sidebar() {
             </NavLink>
           ))}
         </nav>
+
+        <div className="mt-8">
+          <ThemeToggle />
+        </div>
       </div>
     </aside>
   );

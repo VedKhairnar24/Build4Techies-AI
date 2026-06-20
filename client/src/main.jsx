@@ -10,6 +10,10 @@ import {
   AuthProvider,
 } from "./context/AuthContext";
 
+import {
+  ThemeProvider,
+} from "./context/ThemeContext";
+
 import { Toaster } from "react-hot-toast";
 
 ReactDOM.createRoot(
@@ -17,6 +21,8 @@ ReactDOM.createRoot(
 ).render(
   <AuthProvider>
     <Toaster position="top-right" />
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </AuthProvider>
 );
